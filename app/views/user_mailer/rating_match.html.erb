@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1><a href="http://www.iwouldbangyou.com/">I Would Bang You</a></h1>
+    <p>
+      Dear <%= @user.login %>,
+    </p>
+    <p>
+			You said you were into <%= link_to @mate.login, user_url(@mate) %>. 
+			Well today is your lucky day because it turns out that they are into you too!
+    </p>
+		<p>
+			So what should you do now? Message <%= @mate.pronoun %>, dummy!
+			What are you waiting for?
+		</p>
+		
+		<p><%= link_to "Click here to message #{@mate.login} now!", message_url(@message) %></p>
+		
+		<p>
+			Good Luck!
+			The IWBY team
+		</p>
+
+  </body>
+</html>
+

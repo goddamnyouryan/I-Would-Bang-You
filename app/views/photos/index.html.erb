@@ -1,0 +1,24 @@
+<% title "#{@user.login}'s Photos" %>
+
+<h2><%= @user.login %>'s Photos</h2>
+	
+<% if @user == current_user %>
+	
+	<% form_for([@user, @photo], :html => { :multipart => true }) do |f| %>
+		<%= f.file_field :photo %>
+		<%= f.text_field :caption %>
+		<%= f.submit "Upload Image" %>
+	<% end %>
+	
+<% end %>
+
+<ul id="photos">
+	
+	<% @user.photos.each do |photo| %>
+		<li>
+			<%= image_tag photo.photo.url(:large) %><br />
+			<%= photo.caption %>
+		</li>
+	<% end %>
+
+</ul>

@@ -1,0 +1,26 @@
+<% title "#{@user.login}" %>
+
+<h2><%= @user.login %></h2>
+
+<p>
+	<%= image_tag @user.profile_photo %>
+	<%= @user.looking_for %> <%= @user.sex %><br />
+	<%= @user.age %> years old<br />
+	<%= @user.city %>, <%= @user.state %> <em>(<%= pluralize((@user.distance_to(current_user.to_coordinates)).round, "mile") %> away)</em>
+</p>
+
+<% if current_user.mates.include?(@user) %>
+	<% @rating = Rating.find_by_user_id_and_mate_id(current_user.id, @user.id) %>
+	<% if @rating.status == "bang" %>
+		You would totally hit that.
+	<% elsif @rating.status == "date" %>
+		Aww you like them.
+	<% elsif @rating.status == "nope" %>
+		Ugh, they are gross.
+	<% end %>
+	<%= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete %>
+<% else %>
+	<%= link_to "I would bang #{@user.pronoun}", user_ratings_path(@user, :status => "bang"), :method => :post %><br />
+	<%= link_to "I would date #{@user.pronoun}", user_ratings_path(@user, :status => "date"), :method => :post %><br />
+	<%= link_to "Eww gross, no way.", user_ratings_path(@user, :status => "nope"), :method => :post %>
+<% end %>

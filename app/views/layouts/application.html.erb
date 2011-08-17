@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "" %> - I Would Bang You</title>
+  <%= stylesheet_link_tag 'css' %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js' %>
+  <%= javascript_include_tag 'rails' %>
+	<%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+	<%= yield(:head) %>
+</head>
+<body>
+	
+	<% flash.each do |name, msg| %>
+    <%= content_tag :div, raw(msg), :id => "flash_#{name}", :class => "flash" %>
+  <% end %>
+	
+	<header>
+		<h1><%= link_to "I Would Bang You", root_path %></h1>
+		<nav>
+			<ul>
+				<% if user_signed_in? %>
+					<li><%= link_to "my profile", user_path(current_user) %></li>
+					<li>
+						<%= link_to messages_path do %>
+							messages
+							<% unless unread_messages < 1 %>
+								(<%= unread_messages %>)
+							<% end %>
+						<% end %>
+					</li>
+					<li><%= link_to "edit info", edit_user_registration_path %></li>
+					<li><%= link_to "logout", destroy_user_session_path, :method => :delete %></li>
+				<% else %>
+					<li><%= link_to "register", new_user_registration_path %></li>
+					<li><%= link_to "sign in", new_user_session_path %></li>
+				<% end %>
+			</ul>
+		</nav>
+	</header>
+	
+	<div id="container">
+		<%= yield %>
+	</div>
+
+</body>
+</html>
