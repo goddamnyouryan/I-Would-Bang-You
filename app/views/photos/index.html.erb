@@ -5,9 +5,16 @@
 <% if @user == current_user %>
 	
 	<% form_for([@user, @photo], :html => { :multipart => true }) do |f| %>
-		<%= f.file_field :photo %>
-		<%= f.text_field :caption %>
-		<%= f.submit "Upload Image" %>
+		<p>
+			<%=f.label "choose a photo from your hard drive" %><br />
+			<%= f.file_field :photo %>
+		</p>
+		<p>
+			<%= f.label :caption %><br />
+			<%= f.text_field :caption %>
+		</p>
+		
+			<p><%= f.submit "Upload Image" %></p>
 	<% end %>
 	
 <% end %>
