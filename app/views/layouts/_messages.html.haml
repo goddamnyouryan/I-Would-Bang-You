@@ -1,0 +1,4 @@
+= link_to messages_path do
+	messages
+	-unless unread_messages < 1
+		= "(#{unread_messages})"

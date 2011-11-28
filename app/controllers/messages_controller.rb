@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :mark_unread_messages_as_read, :only => :show
   
   def index

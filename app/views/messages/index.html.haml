@@ -1,0 +1,62 @@
+-title "Messages"
+
+%h2.message Messages
+-if @messages.count > 0
+	%h3.message= "#{@messages.count} total #{unread_messages} unread"
+
+	%ul#messages
+		-@messages.each do |message|
+			-if message.responses.where("state = ? AND receiver_id = ?", "unread", current_user.id).count > 0
+				%li.unread
+					-if current_user == message.sender
+						= link_to message do
+							=image_tag message.receiver.profile_photo, :class => "fl"
+							.fl
+								%h3= message.receiver.login
+								%p
+									= truncate(message.responses.last.content, :length => 100)
+									%br/
+									%em= "#{time_ago_in_words(message.responses.last.created_at)} ago"
+						.clear
+					-elsif current_user == message.receiver
+						= link_to message do
+							=image_tag message.sender.profile_photo, :class => "fl"
+							.fl
+								%h3= message.sender.login
+								%p
+									= truncate(message.responses.last.content, :length => 100)
+									%br/
+									%em= "#{time_ago_in_words(message.responses.last.created_at)} ago"
+						.clear
+			-else
+				%li
+					-if current_user == message.sender
+						= link_to message do
+							=image_tag message.receiver.profile_photo, :class => "fl"
+							.fl
+								%h3= message.receiver.login
+								%p
+									= truncate(message.responses.last.content, :length => 100)
+									%br/
+									%em= "#{time_ago_in_words(message.responses.last.created_at)} ago"
+						.clear
+					-elsif current_user == message.receiver
+						= link_to message do
+							=image_tag message.sender.profile_photo, :class => "fl"
+							.fl
+								%h3= message.sender.login
+								%p
+									= truncate(message.responses.last.content, :length => 100)
+									%br/
+									%em= "#{time_ago_in_words(message.responses.last.created_at)} ago"
+						.clear
+-else
+
+	=image_tag "victorian-splash.gif", :class => "fl"
+	
+	.fl{ :style => "width: 600px;"}
+		%h2 You don't have any messages yet.
+		%h3.no-messages
+			To receive messages, start
+			= link_to "rating some ladies.", browse_path
+			If you and a girl both rate each other the same thing, you can message each other here.

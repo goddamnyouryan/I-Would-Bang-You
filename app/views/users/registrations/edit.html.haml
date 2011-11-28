@@ -1,0 +1,86 @@
+- title "Account Settings"
+
+%h2{ :style => "font-size: 48px;"} Account Settings
+
+%nav#account_settings
+	%ul
+		%li= link_to "Account Basics", "#", :class => "current", :name => "account-basics"
+		%li= link_to "Change Password", "#", :name => "change-password"
+		%li= link_to "Email Settings", "#", :name => "email-settings"
+		%li= link_to "Hidden Users", "#", :name => "hidden-users"
+		%li= link_to "Delete Account", "#", :name => "delete-account"
+		
+#account_settings_content
+	
+	#account-basics
+		%h2 Account Basics
+		
+		= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+			= devise_error_messages!
+		
+			%p
+				= f.label :email, "Email Address"
+				%br/
+				= f.email_field :email
+				
+			%p
+				= f.label :zip, "Zip Code"
+				%br/
+				= f.text_field :zip
+				
+			%p
+				= f.label :looking_for
+				%br/
+				= f.check_box :looking_for_men, :class => "looking_for"
+				= f.label :looking_for_men, "Men"
+				= f.check_box :looking_for_women, :class => "looking_for"
+				= f.label :looking_for_women, "Women", :id => "looking_for"
+		 
+			%p= f.submit "Save Settings", :class => "black-button"
+			
+	#change-password{ :style => "display: none;"}
+		%h2 Change Password
+ 
+		= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+			= devise_error_messages!
+			%p
+				= f.label :password, "New Password"
+				%br/
+				= f.password_field :password
+
+			%p
+				= f.label :password_confirmation, "New Password Confirmation"
+				%br/
+				= f.password_field :password_confirmation
+
+			%p= f.submit "Change Password", :class => "black-button"
+	
+	#email-settings{ :style => "display: none;"}
+		%h2 Email Settings
+		%h3 Send me an email when:
+		
+		= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+			= devise_error_messages!
+		
+			%p
+				= f.check_box :email_match
+				= f.label :email_match, "Someone that I'm interested in is also interested in me."
+		
+			%p
+				= f.check_box :email_message
+				= f.label :email_message, "Someone sends me a message."
+			
+			%p= f.submit "Save Settings", :class => "black-button"
+			
+	#hidden-users{ :style => "display: none;"}
+		%h2 Hidden Users
+		%h3 These users never show up in your results.
+		
+		%ul.users
+			= render :partial => 'users/users', :collection => current_user.hidden_users, :as => :user
+	
+	#delete-account{ :style => "display: none;"}
+		%h2 Delete my account
+		
+		%p Are you sick of I Would Bang You? Click on the link below to permanently delete your account (it is non recoverable!)
+		%p= link_to "Delete my account", registration_path(resource_name), :confirm => "Are you sure you want to permanently delete your I Would Bang You account?", :method => :delete, :class => "black-button", :style => "text-align:center; text-decoration: none;"

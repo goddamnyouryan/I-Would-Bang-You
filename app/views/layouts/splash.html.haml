@@ -1,0 +1,25 @@
+!!! 5
+%html
+	%head
+		%title I Would Bang You - The Best Thing to Ever Happen to Online Dating
+		= stylesheet_link_tag 'css'
+		= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+		= javascript_include_tag 'rails'
+		= javascript_include_tag 'jquery.validate.min.js'
+		= javascript_include_tag 'splash'
+		= javascript_include_tag 'date'
+		= csrf_meta_tag
+		= yield(:head)
+	
+	%body
+	
+		#splash-container
+			%header
+				%h1= link_to "I Would Bang You", root_path
+			-flash.each do |name, msg|
+				= content_tag :div, raw(msg), :id => "flash_#{name}_splash", :class => "flash"
+			= yield
+			
+		%footer
+			%container
+			

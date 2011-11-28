@@ -1,0 +1,1 @@
+$("#hide_<%= @user.id %>").html("<%= escape_javascript(render :partial => 'users/hide', :locals => { :user => @user } ) %>");

@@ -1,0 +1,186 @@
+- title "#{@user.login}"
+
+- if @user == current_user
+	- content_for(:head) do
+		= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"
+		:javascript
+			$(document).ready(function(){
+				$('#edit_photos').sortable({
+					axis: 'y',
+					dropOnEmpty: false,
+					handle: '.handle',
+					cursor: 'crosshair',
+					items: 'li',
+					opacity: 0.4,
+					scroll: true,
+					update: function(){
+						$.ajax({
+							type: 'post',
+							data: $('#edit_photos').sortable('serialize'),
+							dataType: 'script',
+							url: "#{user_sort_path(@user)}"})
+						}
+					});
+			});
+			
+	.profile-infinity-box-left
+		= image_tag @user.profile_photo
+		.fl{ :style => "margin-left: 10px;"}
+			%h2= @user.login
+			= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
+			%br/
+			= "#{@user.city}," 
+			= @user.state
+			%br/
+			= link_to "edit your account", edit_user_registration_path
+		.clear	
+		
+		%h3 Upload a Photo
+		- form_for([@user, @photo], :html => { :multipart => true }) do |f|
+			%p
+				=f.label :photo, "choose a photo from your hard drive"
+				%br/
+				= f.file_field :photo
+			%p
+				= f.label :caption, "write a caption for this photo"
+				%br/
+				= f.text_field :caption
+			
+			%p= f.submit "Upload Image", :class => "white-button"
+		
+			- if @user.photos.count > 0
+				%h3{ :style => "margin-bottom:0;" } Edit Photos
+				%h4{ :style => "margin:0;" } Drag to Reorder
+				%ul#edit_photos
+					- @user.photos.order('position ASC').each do |photo|
+						%li{ :id => "photo_#{photo.id}"}
+							= image_tag photo.photo.url(:medium)
+							.links
+								- unless photo.profile == true
+									= link_to "make main photo", user_photo_make_profile_path(@user, photo)
+									%br/
+								- else
+									Your Profile Photo
+									%br/
+								= link_to "re-crop thumbnail", [@user, photo]
+								%br/
+								= link_to "delete", [@user, photo], :method => :delete, :confirm => "Are you sure you want to delete this photo?"
+							%span.handle [drag]
+							.clear
+	
+	.fr
+		= render :partial => 'nav'
+		- if params[:action] == "about"
+			%ul#photos{ :style => "display:none;" }
+				= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
+			#about
+				- @user.questions.order('created_at ASC').each do |question|
+					.question
+						%h3
+							= question.question
+							%span.icon
+								= link_to "✎", edit_user_question_path(current_user, question) , :class => "edit_button", :remote => true
+						%div{ :id => "#{question.id}_answer"}
+							= render :partial => 'questions/answer', :locals => { :question => question }
+		- else
+			%ul#photos
+				- if @user.photos.count > 0
+					= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
+				- else
+					= image_tag "victorian-home.gif", :class => "fl"
+					%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+						You haven't uploaded any
+						%br/
+						photos.Do it with the 
+						%br/
+						form on the left.
+					.clear
+			#about{ :style => "display:none;" }
+				- @user.questions.order('created_at ASC').each do |question|
+					.question
+						%h3
+							= question.question
+							%span.icon
+								= link_to "✎", edit_user_question_path(current_user, question) , :class => "edit_button", :remote => true
+						%div{ :id => "#{question.id}_answer"}
+							= render :partial => 'questions/answer', :locals => { :question => question }
+
+	
+- else
+
+	.profile-infinity-box-left{ :style => "position:fixed;" }
+		= image_tag @user.profile_photo
+		.fl{ :style => "margin-left: 10px;"}
+			%h2= @user.login
+			= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
+			%br/
+			= "#{@user.city}," 
+			= @user.state
+			%br/
+			%em
+				="(#{pluralize((@user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
+			%br/
+			- if @user.sign_in_count > 0
+				= "Last Online: #{time_ago_in_words(@user.last_sign_in_at)} ago"
+		.clear
+		#rating= render :partial => 'rating'
+		.clear	
+	
+	.fr
+		= render :partial => 'nav'
+		- if params[:action] == "about"
+			%ul#photos{ :style => "display:none;" }
+				- if @user.photos.count > 0
+					= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
+				- else
+					= image_tag "victorian-home.gif", :class => "fl"
+					%h2.fl{ :style => "font-size:236px; margin: 50px 0 0 25px;"} 
+						= "#{@user.singular_pronoun} hasn't uploaded any"
+						%br/ 
+						photos yet. Must be ugly.
+			#about
+				- if @user.questions.map(&:answer).compact.nil? || @user.questions.map(&:answer).compact.blank?
+					- @user.questions.order('created_at ASC').each do |question|
+						.question
+							- unless question.answer.nil?
+								%h3
+									= question.question
+								%div{ :id => "#{question.id}_answer"}
+									= simple_format(question.answer)
+				- else
+					= image_tag "victorian-home.gif", :class => "fl"
+					%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+						= "#{@user.singular_pronoun} hasn't answered any"
+						%br/ 
+						questions yet.
+						%br/
+						Must be dumb.
+		- else
+			%ul#photos
+				- if @user.photos.count > 0
+					= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
+				- else
+					= image_tag "victorian-home.gif", :class => "fl"
+					%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+						= "#{@user.singular_pronoun} hasn't uploaded any"
+						%br/ 
+						photos yet. 
+						%br/
+						Must be ugly.
+			#about{ :style => "display:none;" }
+				- unless @user.questions.map(&:answer).compact.nil? || @user.questions.map(&:answer).compact.blank?
+					- @user.questions.order('created_at ASC').each do |question|
+						- unless question.answer.nil?
+							.question
+								%h3
+									= question.question
+								%div{ :id => "#{question.id}_answer"}
+									= simple_format(question.answer)
+				- else
+					= image_tag "victorian-home.gif", :class => "fl"
+					%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+						= "#{@user.singular_pronoun} hasn't answered any"
+						%br/ 
+						questions yet.
+						%br/
+						Must be dumb.

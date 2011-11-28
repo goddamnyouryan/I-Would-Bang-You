@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_filter :authenticate_user!
   
   def index
     @user = User.find params[:user_id]
@@ -23,9 +24,10 @@ class PhotosController < ApplicationController
   
   def update
     @photo = Photo.find params[:id]
+    @user = @photo.user
     @photo.update_attributes(params[:photo])
     if @photo.save
-      redirect_to user_photos_path, :notice => "Photo Cropped!"
+      redirect_to user_path(@user.login), :notice => "Photo Cropped!"
     end
   end
   
@@ -33,6 +35,25 @@ class PhotosController < ApplicationController
     @photo = Photo.find params[:id]
     @photo.destroy
     redirect_to user_photos_path, :notice => "Photo Deleted."
+  end
+  
+  def edit_caption
+    @user = User.find params[:user_id]
+    @photo = Photo.find params[:photo_id]
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def update_caption
+    @user = User.find params[:user_id]
+    @photo = Photo.find params[:photo_id]
+    if params[:caption]
+      @photo.update_attributes(:caption => params[:caption])
+    end
+    respond_to do |format|
+      format.js
+    end
   end
   
   def make_profile
@@ -43,7 +64,19 @@ class PhotosController < ApplicationController
     end
     @photo.update_attributes(:profile => true)
     if @photo.save
-      redirect_to user_photos_path, :notice => "New Profile Photo!"
+      redirect_to user_path(@user.login), :notice => "New Profile Photo!"
+    end
+  end
+  
+  def sort
+    @user = User.find params[:user_id]
+    @user.photos.each do |photo|
+      photo.position = params['photo'].index(photo.id.to_s) + 1
+      photo.save
+    end
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to @video }
     end
   end
 

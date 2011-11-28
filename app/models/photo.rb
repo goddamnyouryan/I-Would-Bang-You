@@ -3,6 +3,7 @@ class Photo < ActiveRecord::Base
   has_attached_file :photo, :styles => { 
                             :tiny => {:geometry => "30x30#", :processors => [:cropper]},
                             :thumb => {:geometry => "90x90#", :processors => [:cropper]}, 
+                            :medium => {:geometry => "50x50#", :processors => [:cropper]},
                             :large => {
                               :processors => [:watermark],
                               :geometry => "600x600>", 

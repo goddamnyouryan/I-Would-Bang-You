@@ -1,0 +1,44 @@
+<% title "A little bit about #{@user.login}"%>
+
+<%= render :partial => 'users', :locals => { :user => @user } %>
+
+<%= render :partial => 'nav' %>
+
+<h2>About <%= @user.login %></h2>
+
+<% if @user == current_user %>
+	<p><%= link_to "edit answers", user_answer_questions_path(@user.login) %></p>
+<% end %>
+
+<% if @user.apocalypse == nil && @user.travel == nil && @user.favorite_class == nil %>
+
+	<% if @user == current_user %>
+		<p>You haven't answered any questions yet.  <%= link_to "Answer Some!", user_answer_questions_path(@user.login) %></p>
+	<% else %>
+		<p>They haven't answered any questions yet.  Laaaaaammmeeee.</p>
+	<% end %>
+
+<% else %>
+
+	<% unless @user.apocalypse == nil || @user.apocalypse == "" %>
+		
+		<h4>If you had to be apart of the apocalypse, what kind of apocalypse would you want it to be?</h4>
+		<p><%= @user.apocalypse %></p>
+		
+	<% end %>
+	
+	<% unless @user.travel == nil || @user.travel == "" %>
+		
+		<h4>Where was the best place you ever traveled to?</h4>
+		<p><%= @user.travel %></p>
+		
+	<% end %>
+	
+	<% unless @user.favorite_class == nil || @user.favorite_class == "" %>
+		
+		<h4>What was your favorite highschool/college class?</h4>
+		<p><%= @user.favorite_class %></p>
+		
+	<% end %>
+
+<% end %>

@@ -1,0 +1,25 @@
+<% title "Answer Questions" %>
+
+<h2>Answer some questions</h2>
+<h3>You know, so people can know more about you than how bangable you are.</h3>
+
+<% form_for current_user, :url => user_questions_path(current_user.login) do |f| %>
+	
+	<p>
+		<%= f.label :apocalypse, "If you had to be apart of the apocalypse, what kind of apocalypse would you want it to be?" %><br />
+		<%= f.text_area :apocalypse %>
+	</p>
+	
+	<p>
+		<%= f.label :travel, "Where was the best place you ever traveled to?" %><br />
+		<%= f.text_area :travel %>
+	</p>
+	
+	<p>
+		<%= f.label :favorite_class, "What was your favorite highschool/college class?" %><br />
+		<%= f.text_area :favorite_class %>
+	</p>
+	
+	<p><%= f.submit %></p>
+	
+<% end %>

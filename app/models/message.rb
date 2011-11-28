@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
   def send_new_message_email
     @user1 = self.sender
     @user2 = self.receiver
-    UserMailer.rating_match(@user1, @user2, self).deliver
-    UserMailer.rating_match(@user2, @user1, self).deliver
+    UserMailer.rating_match(@user1, @user2, self).deliver if @user1.email_match?
+    UserMailer.rating_match(@user2, @user1, self).deliver if @user2.email_match?
   end
 end

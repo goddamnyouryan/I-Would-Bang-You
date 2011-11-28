@@ -1,0 +1,1 @@
+$("div#<%= @question.id %>_answer").html("<%= escape_javascript(render :partial => 'answer', :locals => { :question => @question }) %>");

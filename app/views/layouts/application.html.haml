@@ -1,0 +1,46 @@
+!!! 5
+%html
+	%head
+		%title= "#{content_for?(:title) ? yield(:title) : ""} - I Would Bang You"
+		= stylesheet_link_tag 'css'
+		= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+		= javascript_include_tag 'rails'
+		= javascript_include_tag 'jquery.validate.min.js'
+		= javascript_include_tag 'application'
+		= csrf_meta_tag
+		= yield(:head)
+	
+	%body
+  	
+		%header.main
+			#content
+				%h1= link_to "I Would Bang You", root_path
+				%nav
+					-if user_signed_in?
+						%ul
+							%li= link_to "home", root_path
+							%li#messages= render :partial => "layouts/messages"
+							%li= link_to "random", browse_path
+							%li= link_to "search", search_path
+							%li#profile
+								= link_to user_path(current_user.login) do
+									= image_tag current_user.nav_photo
+									= current_user.login
+									%span.icon{ :style => "font-size: 10px;"} ↓
+								.clear
+								%ul#subnav
+									%li= link_to "view / edit my profile", user_path(current_user.login)
+									%li= link_to "upload a photo", user_path(current_user.login)
+									%li= link_to "account settings", edit_user_registration_path
+									%li#logout= link_to "logout", destroy_user_session_path, :method => :delete
+					-else
+						%ul
+							%li= link_to "register", new_user_registration_path
+							%li= link_to "sign in", new_user_session_path
+		.clear
+		
+		-flash.each do |name, msg|
+			= content_tag :div, raw(msg), :id => "flash_#{name}", :class => "flash"
+		
+		#container
+			= yield

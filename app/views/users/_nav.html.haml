@@ -1,0 +1,10 @@
+%nav#user
+	%ul
+		- unless params[:action] == "about"
+			%li= link_to "photos", user_path(@user.login), :class => "current", :id => "left-link"
+			%li= link_to "about", user_about_path(@user.login), :id => "right-link"
+		- else
+			%li= link_to "photos", user_path(@user.login), :id => "left-link"
+			%li= link_to "about", user_about_path(@user.login), :class => "current", :id => "right-link"
+
+.clear

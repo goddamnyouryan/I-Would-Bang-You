@@ -1,0 +1,4 @@
+%li
+	= image_tag photo.photo.url(:large)
+	= render :partial => 'photos/caption', :locals => { :photo => photo }
+

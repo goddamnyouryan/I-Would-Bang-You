@@ -1,0 +1,13 @@
+$("p#<%= @photo.id %>_photo_caption").html("<%= escape_javascript(render :partial => 'edit_caption', :photo => @photo) %>");
+$("#edit_caption").validate({
+	rules: {
+		caption: {
+			maxlength: 255
+		}
+	},
+	messages: {
+		caption: {
+			maxLength: "Captions are maximum 255 characters."
+		}
+	},
+});

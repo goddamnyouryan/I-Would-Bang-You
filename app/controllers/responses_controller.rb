@@ -1,4 +1,6 @@
 class ResponsesController < ApplicationController
+  before_filter :authenticate_user!
+  
   def create
     @message = Message.find params[:message_id]
     if current_user == @message.sender
@@ -7,7 +9,10 @@ class ResponsesController < ApplicationController
       @response = Response.create(:message_id => @message.id, :sender_id => current_user.id, :receiver_id => @message.sender_id, :content => params[:response][:content])
     end
     if @response.save
-      redirect_to @message, :notice => "Message Sent!"
+      respond_to do |format|
+        format.js
+        format.html { redirect_to @message, :notice => "Message Sent!" }
+      end
     end
   end
 

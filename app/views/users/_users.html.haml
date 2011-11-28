@@ -1,0 +1,28 @@
+%li
+	= link_to user_path(user.login) do
+		= image_tag user.profile_photo
+		.fl{ :style => "margin-left: 10px;"}
+			%h3= user.login
+			= "#{user.age} year old #{user.looking_for.downcase} #{user.sex.downcase}"
+			%br/
+			= "#{user.city}," 
+			= user.state
+			%em
+				="(#{pluralize((user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
+			%br/
+			- if user.sign_in_count > 0
+				= "Last Online: #{time_ago_in_words(user.last_sign_in_at)} ago"
+				%br/
+			- if current_user.mates.include?(user)
+				%em
+					- @rating = Rating.find_by_user_id_and_mate_id(current_user.id, user.id)
+					- if @rating.status == "bang"
+						You would totally hit that.
+					- elsif @rating.status == "date"
+						Aww you like them.
+					- elsif @rating.status == "nope"
+						Ugh, they are gross. No way.
+		.clear
+.clear
+%span{ :id => "hide_#{user.id}"}		
+	= render :partial => 'users/hide', :locals => { :user => user }

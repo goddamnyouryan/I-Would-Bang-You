@@ -1,0 +1,5 @@
+%p{ :id => "#{photo.id}_photo_caption" }
+	= photo.caption
+	- if photo.user == current_user
+		%span.icon
+			= link_to "✎", user_photo_edit_caption_path(current_user, photo) , :class => "edit_button", :remote => true

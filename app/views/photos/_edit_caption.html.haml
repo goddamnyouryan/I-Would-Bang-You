@@ -1,0 +1,5 @@
+= form_tag user_photo_update_caption_path(current_user, @photo), :id => "edit_caption", :remote => true do
+	
+	= text_field_tag :caption, "#{@photo.caption}"
+	= submit_tag "update caption", :class => "black-button"
+	= link_to "cancel", user_photo_update_caption_path(current_user, @photo), :remote => true, :class => "cancel"

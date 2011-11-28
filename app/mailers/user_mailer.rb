@@ -8,4 +8,13 @@ class UserMailer < ActionMailer::Base
     mail(:to => "#{user.email}",
          :subject => "#{mate.login} totally thinks you're bangable too!", :from => "IWouldBangYou")
   end
+  
+  def sent_response(user, mate, response)
+    @user = user
+    @mate = mate
+    @response = response
+    mail(:to => "#{mate.email}",
+         :subject => "#{user.login} sent you a message.", :from => "IWouldBangYou")
+  end
+  
 end

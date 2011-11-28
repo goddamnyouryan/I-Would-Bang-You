@@ -1,0 +1,6 @@
+- form_tag user_question_path(current_user, question), :method => :put, :remote => true do
+	
+	= text_area_tag :answer, @question.answer
+	%br/
+	= submit_tag "update answer", :class => "black-button"
+	= link_to "cancel", user_question_path(current_user, question), :method => :put, :remote => true, :class => "cancel"

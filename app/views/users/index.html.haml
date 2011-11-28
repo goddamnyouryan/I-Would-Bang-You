@@ -1,0 +1,84 @@
+-title "Home"
+
+-unless user_signed_in?
+	.fl
+		%h2.subtitle Not just personal ads.
+		%h3#description Create a Profile. Upload Photos. Browse Profiles. |
+										If you like the look of someone click ‘I would bang them’. | 
+										If they click the same thing on your profile, you can message them.  Easy peasy. |
+	
+	.infinity-box-right{ :style => "margin-top: -50px;" }
+		=form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+			%h3 Sign In
+			%p
+				= f.label :login, "Email Address or Username"
+				%br/
+				= f.text_field :login
+		
+			%p
+				= f.label :password 
+				%br/
+				= f.password_field :password
+		
+			-if devise_mapping.rememberable?
+				%p
+					= f.check_box :remember_me
+					= f.label :remember_me
+		
+			%p
+				= f.submit "sign in", :class => "white-button"
+				- if devise_mapping.recoverable? && controller_name != 'passwords'
+					= link_to "Forgot your password?", new_password_path(resource_name), :style => "font-size: 12px;float:right;margin-top:10px;"
+					%br/
+			
+	.clear
+	
+	.infinity-box-left{ :style => "margin-top: -75px;" }
+		= render :partial => 'users/registrations/sign_up'
+		
+	= image_tag "victorian-splash.gif", :class => "fl", :style => "margin: 25px 0 0 250px"
+
+-else
+	
+	-if current_user.photos.count == 0 || current_user.questions.map(&:answer).compact.empty? || current_user.ratings.count == 0
+		= image_tag "victorian-home.gif", :class => "fl"
+		%h2.fl{ :style => "font-size:72px; margin: 20px 0 0 25px;"} 
+			Let’s find you someone 
+			%br/ 
+			to bang, shall we?
+		.clear
+
+	-if current_user.photos.count == 0
+		.promo
+			= link_to user_path(current_user.login) do
+				%h3 Upload some pics
+				.icon{ :style => "font-size:170px;"} p
+				%p 
+					No one is going to want to bang you if you don't have any photos.
+
+	-if current_user.questions.map(&:answer).compact.empty?
+		.promo
+			= link_to user_about_path(current_user.login) do
+				%h3 Answer Some Questions
+				.icon{ :style => "font-size:170px;"} u
+				%p
+					Come on. You might be hot, but people like a good personality too.  
+
+	-if current_user.ratings.count == 0
+		.promo
+			= link_to browse_path do
+				%h3= "Check out some #{current_user.looking_for_colloquial}"
+				.icon{ :style => "font-size:170px;"} ✔
+				%p
+					Rate some hotties. Or notties.  
+	.clear
+	
+	.user_list{ :style => "margin-right: 40px;" }
+		%h3{ :style => "font-size:48px; margin: 25px 0;"}= "Here's some random #{current_user.looking_for_colloquial}."
+		%ul.users
+			= render :partial => 'users', :collection => @random, :as => :user
+
+	.user_list
+		%h3{ :style => "font-size:48px; margin: 25px 0;"}= "These #{current_user.looking_for_colloquial} are your best shot."
+		%ul.users
+			= render :partial => 'users', :collection => @similar, :as => :user

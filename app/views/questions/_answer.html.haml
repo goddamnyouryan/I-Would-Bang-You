@@ -1,0 +1,4 @@
+- if question.answer.nil?
+	You haven't answered this question yet.  Click on the icon to the right of the question above to answer.
+- else
+	= simple_format(question.answer)

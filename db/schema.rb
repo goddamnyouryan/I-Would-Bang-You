@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815065332) do
+ActiveRecord::Schema.define(:version => 20111127064730) do
+
+  create_table "hides", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "hidden_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
@@ -30,6 +37,16 @@ ActiveRecord::Schema.define(:version => 20110815065332) do
     t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "question"
+    t.text     "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
   end
 
   create_table "ratings", :force => true do |t|
@@ -52,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20110815065332) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                                 :default => "",   :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -74,8 +91,10 @@ ActiveRecord::Schema.define(:version => 20110815065332) do
     t.string   "state"
     t.float    "latitude"
     t.float    "longitude"
-    t.integer  "rating_count",                          :default => 0,  :null => false
-    t.integer  "score",                                 :default => 0,  :null => false
+    t.integer  "rating_count",                          :default => 1,    :null => false
+    t.integer  "score",                                 :default => 0,    :null => false
+    t.boolean  "email_match",                           :default => true, :null => false
+    t.boolean  "email_message",                         :default => true, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

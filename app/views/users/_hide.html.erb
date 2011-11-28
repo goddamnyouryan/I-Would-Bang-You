@@ -1,0 +1,6 @@
+<% if current_user.hidden_users.include?(user) %>
+	<% @hide = Hide.find_by_user_id_and_hidden_id(current_user.id, user.id) %>
+	<%= link_to "Un-hide", user_unhide_path(user), :method => :delete, :remote => true %>
+<% else %>
+	<%= link_to "Hide", user_hide_path(user), :method => :post, :remote => true %>
+<% end %>

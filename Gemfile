@@ -11,6 +11,9 @@ gem 'devise'
 gem 'geocoder'
 gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
+gem 'haml'
+gem 'date_validator'
+gem 'client_side_validations'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -30,6 +33,6 @@ gem 'aws-s3', :require => 'aws/s3'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group :development do
+  gem 'faker'
+end

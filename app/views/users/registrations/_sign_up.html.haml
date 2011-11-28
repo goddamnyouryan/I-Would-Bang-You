@@ -1,0 +1,63 @@
+
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => "new_user_signup" }) do |f|
+	%h3 Sign Up for Free
+	= devise_error_messages!
+	%p
+		= f.label :i_am_a 
+		%br/
+		= f.select :sex, ["Female", "Male"]
+
+	%p
+		= f.label :looking_for
+		%br/
+		= f.check_box :looking_for_men, :class => "looking_for"
+		= f.label :looking_for_men, "Men"
+		= f.check_box :looking_for_women, :class => "looking_for"
+		= f.label :looking_for_women, "Women", :id => "looking_for"
+
+	%p#birthday
+		= f.label :birthday
+		%br/
+		= f.date_select :birthday, :order => [:month, :day, :year],
+															 :end_year => Time.now.year - 99,
+															 :start_year => Time.now.year,
+															 :prompt => { :year => "Year", :day => "Day", :month => "Month" }
+		= f.text_field :birthday, :class => "required", :style => "margin: -99999px;position: absolute;"
+	%label{ :class => "error valid", :for => "birthday", :generated => "true", :style => "display:none;" } 
+		So we can show you people in your area.
+
+	%p
+		= f.label :my_zipcode
+		%br/
+		= f.text_field :zip
+		%label{ :class => "error valid", :for => "user_zip", :generated => "true", :style => "display:none;" } 
+			So we can show you people in your area.
+
+	%p
+		= f.label :username
+		%br/
+		= f.text_field :login
+		%label{ :class => "error valid", :for => "user_login", :generated => "true", :style => "display:none;" } 
+			This is what people will know you by.
+
+	%p
+		= f.label :email
+		%br/
+		= f.email_field :email
+		%label{ :class => "error valid", :for => "user_email", :generated => "true", :style => "display:none;" } 
+			We won't publish this on the site, don't worry.
+
+	%p
+		= f.label :password
+		%br/
+		= f.password_field :password
+		%label{ :class => "error valid", :for => "user_password", :generated => "true", :style => "display:none;" } 
+			Don't use your dog's name.
+			
+	%p
+		= f.check_box :terms
+		= f.label :terms, "I agree to the"
+		= link_to "Terms of Service", root_path, :style => "font-size:12px;", :id => "terms"
+
+	%p= f.submit "sign up", :class => "white-button fr"

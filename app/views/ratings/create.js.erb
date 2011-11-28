@@ -1,0 +1,4 @@
+$("#rating").html("<%= escape_javascript(render :partial => 'users/rating' ) %>");
+<% unless @message.nil? %>
+	$("li#messages").html("<%= escape_javascript(render :partial => 'layouts/messages' ) %>");
+<% end %>

@@ -1,0 +1,22 @@
+-if response.replyee == current_user
+	%li.received
+		= link_to user_path(response.replyer.login) do
+			= image_tag response.replyer.profile_photo
+		.message
+			= simple_format(response.content)
+			.meta
+				from
+				= link_to response.replyer.login, user_path(response.replyer.login)
+				.fr= "#{time_ago_in_words(response.created_at)} ago"
+	.clear
+-else
+	%li.sent
+		.message
+			= simple_format(response.content)
+			.meta
+				from
+				= link_to response.replyer.login, user_path(response.replyer.login)
+				.fr= "#{time_ago_in_words(response.created_at)} ago"
+		= link_to user_path(response.replyer.login) do
+			= image_tag response.replyer.profile_photo
+	.clear
