@@ -14,6 +14,7 @@ gem 'aws-s3', :require => 'aws/s3'
 gem 'haml'
 gem 'date_validator'
 gem 'kaminari'
+gem 'exceptional'
 
 # Use unicorn as the web server
 # gem 'unicorn'

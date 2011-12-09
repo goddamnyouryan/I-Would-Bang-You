@@ -44,6 +44,8 @@ GEM
       warden (~> 1.0.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exceptional (2.0.32)
+      rack
     faker (0.9.5)
       i18n (~> 0.4)
     geocoder (1.0.2)
@@ -100,6 +102,7 @@ DEPENDENCIES
   aws-s3
   date_validator
   devise
+  exceptional
   faker
   geocoder
   haml
