@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :index, :check_login, :contact, :about ]
+  before_filter :authenticate_user!, :except => [ :index, :check_login, :contact, :learn_more ]
   after_filter :add_visit, :only => [:show, :random]
   
   def index
