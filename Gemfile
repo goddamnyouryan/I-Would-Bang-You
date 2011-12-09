@@ -13,7 +13,7 @@ gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'haml'
 gem 'date_validator'
-gem 'client_side_validations'
+gem 'kaminari'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -30,18 +30,22 @@
 	</script>
 <% end %>
 
-<h2>Crop This Photo</h2>
-
-<%= image_tag @photo.photo.url(:large), :id => "cropbox" %>
-
-<h4>Preview</h4>  
-<div style="width: 90px; height: 90px; overflow: hidden;">  
-  <%= image_tag @photo.photo.url(:large), :id => "preview" %>  
+<div class="fl">
+	<h2>Crop This Photo</h2>
+	<%= image_tag @photo.photo.url(:large), :id => "cropbox" %>
 </div>
 
-<% form_for [@user, @photo] do |f| %>
-	<% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>  
-		<%= f.hidden_field attribute, :id => attribute %>  
+<div class="fl" style="margin: 50px 0 0 25px">
+	<h4 style="margin-bottom: 0;">Preview</h4>  
+	<div style="width: 90px; height: 90px; overflow: hidden;">  
+  	<%= image_tag @photo.photo.url(:large), :id => "preview" %>  
+	</div>
+	<% form_for [@user, @photo] do |f| %>
+		<% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>  
+			<%= f.hidden_field attribute, :id => attribute %>  
+		<% end %>
+		<%= f.submit "Crop Photo", :class => "black-button", :style => "margin-top: 25px" %>
 	<% end %>
-	<%= f.submit "Crop" %>
-<% end %>
+</div>
+
+<div class="clear"></div>

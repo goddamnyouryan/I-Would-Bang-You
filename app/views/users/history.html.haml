@@ -1,0 +1,41 @@
+-title "Your Banging History"
+
+%h2{ :style => "text-transform:capitalize;" }= "#{current_user.looking_for_colloquial} You've Rated"
+
+%nav.account_settings{ :style => "margin-right:128px;"}
+	%ul
+		-if params[:mates] == nil
+			%li= link_to "all #{current_user.looking_for_colloquial} you've rated", history_path, :class => "current"
+		-else
+			%li= link_to "all #{current_user.looking_for_colloquial} you've rated", history_path
+			
+		-if params[:mates] == "bang"
+			%li= link_to "#{current_user.looking_for_colloquial} you'd bang", history_path(:mates => "bang"), :class => "current"
+		-else
+			%li= link_to "#{current_user.looking_for_colloquial} you'd bang", history_path(:mates => "bang")
+		
+		-if params[:mates] == "date"
+			%li= link_to "#{current_user.looking_for_colloquial} you'd date", history_path(:mates => "date"), :class => "current"
+		-else
+			%li= link_to "#{current_user.looking_for_colloquial} you'd date", history_path(:mates => "date")
+		
+		-if params[:mates] == "nope"
+			%li= link_to "#{current_user.looking_for_colloquial} that are gross", history_path(:mates => "nope"), :class => "current"
+		-else
+			%li= link_to "#{current_user.looking_for_colloquial} that are gross", history_path(:mates => "nope")
+			
+-if params[:mates] == "bang"
+	%h1{ :style => "text-transform:capitalize;" }= "You'd Bang #{@count} #{current_user.looking_for_colloquial}"
+-elsif params[:mates] == "date"
+	%h1{ :style => "text-transform:capitalize;" }= "You'd Date #{@count} #{current_user.looking_for_colloquial}"
+-elsif params[:mates] == "nope"
+	%h1{ :style => "text-transform:capitalize;" }= "You Think #{@count} #{current_user.looking_for_colloquial} Are Gross"
+-else
+	%h1{ :style => "text-transform:capitalize;" }= "You've Rated #{@count} #{current_user.looking_for_colloquial}"
+
+%ul.users{ :style => "float:left;width: 838px;"}
+	= render :partial => 'users', :collection => @history, :as => :user
+
+.clear
+
+= paginate @history, :style => "float:right;"

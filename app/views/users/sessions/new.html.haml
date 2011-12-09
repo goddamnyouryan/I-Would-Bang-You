@@ -1,0 +1,29 @@
+-title "Sign In"
+
+%h2 Sign in
+
+.infinity-box-left
+	=form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+		%h3 Sign In
+		%p
+			= f.label :login, "Email Address or Username"
+			%br/
+			= f.text_field :login
+	
+		%p
+			= f.label :password 
+			%br/
+			= f.password_field :password
+	
+		-if devise_mapping.rememberable?
+			%p
+				= f.check_box :remember_me
+				= f.label :remember_me
+	
+		%p
+			= f.submit "sign in", :class => "white-button"
+			- if devise_mapping.recoverable? && controller_name != 'passwords'
+				= link_to "Forgot your password?", new_password_path(resource_name), :style => "font-size: 12px;float:right;margin-top:10px;"
+				%br/
+		
+= image_tag "victorian-splash.gif", :class => "fr"

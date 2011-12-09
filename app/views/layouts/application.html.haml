@@ -20,7 +20,7 @@
 						%ul
 							%li= link_to "home", root_path
 							%li#messages= render :partial => "layouts/messages"
-							%li= link_to "random", browse_path
+							%li= link_to "random", random_path
 							%li= link_to "search", search_path
 							%li#profile
 								= link_to user_path(current_user.login) do
@@ -30,7 +30,7 @@
 								.clear
 								%ul#subnav
 									%li= link_to "view / edit my profile", user_path(current_user.login)
-									%li= link_to "upload a photo", user_path(current_user.login)
+									%li= link_to "history", history_path
 									%li= link_to "account settings", edit_user_registration_path
 									%li#logout= link_to "logout", destroy_user_session_path, :method => :delete
 					-else
@@ -42,5 +42,37 @@
 		-flash.each do |name, msg|
 			= content_tag :div, raw(msg), :id => "flash_#{name}", :class => "flash"
 		
-		#container
+		#container.logged_in
 			= yield
+		.clear
+		
+		%footer
+			#container
+				.fl
+					%h1= link_to "I Would Bang You", root_path
+					%p!= "&copy; #{Time.now.year} #{link_to "Ryan MacInnes", user_path("goddamnyouryan")}"
+				.fl{ :style => "margin: 0 0 50px 100px"}
+					%nav.logged_in
+						.fl
+							%ul
+								%li= link_to "Home", root_path
+								%li= link_to "My Profile", user_path(current_user.login)
+								%li{ :style => "text-transform: capitalize;"}= render :partial => "layouts/messages"
+								%li= link_to "Search", search_path
+								
+						.fl{ :style => "margin-left: 264px;" }
+							%ul
+								%li= link_to "Edit My Profile", user_path(current_user.login)
+								%li= link_to "History", history_path
+								%li= link_to "Account Settings", edit_user_registration_path
+								%li= link_to "Logout", destroy_user_session_path, :method => :delete
+								
+						.fl{ :style => "margin-left: 263px;" }
+							%ul
+								%li
+									= link_to image_tag('twitter.png'), "http://www.twitter.com/iwouldbangyou", :target => "_blank"
+									= link_to image_tag('facebook.png'), "http://www.facebook.com/pages/Iwouldbangyou/215857168475583", :target => "_blank"
+								%li= link_to "About", about_path
+								%li= link_to "Contact", contact_path
+				.clear
+					= link_to "Go to a random #{current_user.looking_for_colloquial} profile", random_path, :class => "white-button bottom-random"

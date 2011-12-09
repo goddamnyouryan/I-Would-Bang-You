@@ -66,7 +66,7 @@
 
 	-if current_user.ratings.count == 0
 		.promo
-			= link_to browse_path do
+			= link_to random_path do
 				%h3= "Check out some #{current_user.looking_for_colloquial}"
 				.icon{ :style => "font-size:170px;"} ✔
 				%p

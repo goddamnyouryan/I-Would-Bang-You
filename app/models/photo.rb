@@ -5,8 +5,8 @@ class Photo < ActiveRecord::Base
                             :thumb => {:geometry => "90x90#", :processors => [:cropper]}, 
                             :medium => {:geometry => "50x50#", :processors => [:cropper]},
                             :large => {
-                              :processors => [:watermark],
                               :geometry => "600x600>", 
+                              :processors => [:watermark],
                               :watermark_path => "#{RAILS_ROOT}/public/images/watermark.png",
                               :position => 'SouthWest'
                               }

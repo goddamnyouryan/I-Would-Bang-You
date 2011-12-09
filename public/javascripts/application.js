@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	
+	var height = $(document).height() - 310;
+	$("div.logged_in").css('height', height + "px")
+	
 	$("li#profile").hover(function () {
 		if ($("ul#subnav").is(":hidden")) {
 			$("ul#subnav").show();
@@ -25,6 +28,9 @@ $(document).ready(function(){
 		if ($("ul#photos").is(":hidden")) {
 			$("ul#photos").show();
 			$("div#about").hide();
+			$("div.logged_in").css('height', "0")
+			var height = $(document).height() - 310;
+			$("div.logged_in").css('height', height + "px")
 			$("nav#user a#left-link").addClass("current");
 			$("nav#user a#right-link").removeClass("current");
 		}
@@ -35,6 +41,9 @@ $(document).ready(function(){
 		if ($("div#about").is(":hidden")) {
 			$("div#about").show();
 			$("ul#photos").hide();
+			$("div.logged_in").css('height', "0")
+			var height = $(document).height() - 310;
+			$("div.logged_in").css('height', height + "px")
 			$("nav#user a#right-link").addClass("current");
 			$("nav#user a#left-link").removeClass("current");
 		}
@@ -55,4 +64,10 @@ $(document).ready(function(){
 		return false
 	});
 
+});
+
+$(window).resize(function(){
+	$("div.logged_in").css('height', "0")
+	var height = $(document).height() - 310;
+	$("div.logged_in").css('height', height + "px")
 });

@@ -19,7 +19,25 @@
 			-flash.each do |name, msg|
 				= content_tag :div, raw(msg), :id => "flash_#{name}_splash", :class => "flash"
 			= yield
+		.clear
 			
 		%footer
-			%container
+			#container
+				.fl
+					%h1= link_to "I Would Bang You", root_path
+					%p!= "&copy; #{Time.now.year} #{link_to "Ryan MacInnes", "http://www.goddamnyouryan.com/"}"
+					%p
+						= link_to image_tag('twitter.png'), "http://www.twitter.com/iwouldbangyou", :target => "_blank"
+						= link_to image_tag('facebook.png'), "http://www.facebook.com/pages/Iwouldbangyou/215857168475583", :target => "_blank"
+					%p
+						<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FIwouldbangyou%2F215857168475583&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35&amp;appId=267556526607973" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
+				.fr
+					%nav
+						%ul
+							%li= link_to "Home", root_path
+							%li= link_to "Sign Up", new_user_registration_path
+							%li= link_to "Login", new_user_session_path
+							%li= link_to "About", about_path
+							%li= link_to "Contact", contact_path
+				.clear
 			

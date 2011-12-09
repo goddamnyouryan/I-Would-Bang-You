@@ -36,9 +36,9 @@ class RatingsController < ApplicationController
     @mate = User.find params[:user_id]
     if @rating.save
       if @rating.status == "nope"
-        redirect_to browse_path(@user.login), :notice => "Agreed. #{@user.login} IS gross. They won't contact you. Ugh."
+        redirect_to random_path(@user.login), :notice => "Agreed. #{@user.login} IS gross. They won't contact you. Ugh."
       elsif Rating.where("user_id = ? AND mate_id = ? AND status != ?", @user.id, current_user.id, "nope").empty?
-        redirect_to browse_path, :notice => "You have rated #{@user.login}. We'll let you know if they feel the same."
+        redirect_to random_path, :notice => "You have rated #{@user.login}. We'll let you know if they feel the same."
       else
         @message = Message.create(:sender_id => current_user.id, :receiver_id => params[:user_id])
         @response = Response.create(:message_id => @message.id, :sender_id => current_user.id, :receiver_id => current_user.id, :origin => "robot", :content => "Hey #{@message.sender.login} and #{@message.receiver.login}...it seems you two are totally into each other.  You can message each other from here.  So do it already!")

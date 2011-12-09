@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_filter :mark_unread_messages_as_read, :only => :show
   
   def index
-    @messages = current_user.sent + current_user.received
+    @messages = Message.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id).order("updated_at DESC")
   end
 
   def show

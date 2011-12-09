@@ -1,0 +1,73 @@
+-title "Random - #{@user.login}"
+
+.profile-infinity-box-left{ :style => "position:fixed;"}
+	= image_tag @user.profile_photo
+	.fl{ :style => "margin-left: 10px;"}
+		%h2= @user.login
+		= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
+		%br/
+		= "#{@user.city}," 
+		= @user.state
+		%br/
+		%em
+			="(#{pluralize((@user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
+		%br/
+		- if @user.sign_in_count > 0
+			= "Last Online: #{time_ago_in_words(@user.last_sign_in_at)} ago"
+	.clear
+	
+	#rating
+		-if current_user.mates.include?(@user)
+			-@rating = Rating.find_by_user_id_and_mate_id(current_user.id, @user.id)
+			-if @rating.status == "bang"
+				You would totally hit that.
+			-elsif @rating.status == "date"
+				Aww you like them.
+			-elsif @rating.status == "nope"
+				Ugh, they are gross.
+			-unless @user.mates.include?(current_user)
+				= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
+			-else
+				-@message = Message.where("sender_id = ? AND receiver_id = ?", current_user.id, @user.id).first
+				="You like each other! #{link_to "Message #{@user.pronoun}", @message}"
+		-else
+			%p= link_to "I would bang #{@user.pronoun}", user_rate_path(@user, :status => "bang"), :method => :post, :class => "white-button"
+			%p= link_to "I would date #{@user.pronoun}", user_rate_path(@user, :status => "date"), :method => :post, :class => "white-button"
+			%p= link_to "Eww gross, no way.", user_rate_path(@user, :status => "nope"), :method => :post, :class => "white-button"
+			%p= link_to "Skip", random_path, :class => "white-button"
+
+.fr
+	%nav#user
+		%ul
+			%li= link_to "photos", user_path(@user.login), :class => "current", :id => "left-link"
+			%li= link_to "about", user_about_path(@user.login), :id => "right-link"
+
+	.clear
+	%ul#photos
+		- if @user.photos.count > 0
+			= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
+		- else
+			= image_tag "victorian-home.gif", :class => "fl"
+			%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+				= "#{@user.singular_pronoun} hasn't uploaded any"
+				%br/ 
+				photos yet.
+				%br/
+				Must be ugly.
+	#about{ :style => "display:none;" }
+		- unless @user.questions.map(&:answer).compact.nil? || @user.questions.map(&:answer).compact.blank?
+			- @user.questions.order('created_at ASC').each do |question|
+				.question
+					- unless question.answer.nil?
+						%h3
+							= question.question
+						%div{ :id => "#{question.id}_answer"}
+							= simple_format(question.answer)
+		- else
+			= image_tag "victorian-home.gif", :class => "fl"
+			%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+				= "#{@user.singular_pronoun} hasn't answered any"
+				%br/ 
+				questions yet.
+				%br/
+				Must be dumb.

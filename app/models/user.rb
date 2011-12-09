@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :ratings
   has_many :questions
+  
+  has_many :visits
+  has_many :visitors, :through => :visits
+  has_many :viewed, :foreign_key => "visitor_id", :class_name => "Visit"
+  
   has_many :mates, :through => :ratings
   has_many :sent, :foreign_key => "sender_id", :class_name => "Message"
   has_many :received, :foreign_key => "receiver_id", :class_name => "Message"
@@ -167,6 +172,10 @@ class User < ActiveRecord::Base
         User.where("looking_for_women = ? AND sex = ?", true, "Male")
       end
     end
+  end
+  
+  def visited
+    self.viewed.map(&:user)
   end
   
   def update_score(score)
