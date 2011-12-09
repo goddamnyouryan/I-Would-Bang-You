@@ -129,7 +129,7 @@ class UsersController < ApplicationController
   private
   
   def add_visit
-    unless current_user == @user
+    unless current_user == @user || @user.nil?
       @user.visits.create(:visitor_id => current_user.id)
     end
   end
