@@ -2,6 +2,7 @@
 %html
 	%head
 		%title= "#{content_for?(:title) ? yield(:title) : ""} - I Would Bang You"
+		%link{ :rel => "icon",  :href => "favicon.png", :type => "image/png"}
 		= stylesheet_link_tag 'css'
 		= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
 		= javascript_include_tag 'rails'
