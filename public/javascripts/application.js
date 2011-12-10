@@ -63,6 +63,10 @@ $(document).ready(function(){
 		$(this).addClass("current");
 		return false
 	});
+
+});
+
+$(window).load(function(){
 	
 	if ($('.profile-infinity-box-left').length > 0) {
 		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
@@ -81,7 +85,7 @@ $(document).ready(function(){
 			$('.infinity-left-corner').addClass('fixed');
 		}
 	}
-
+	
 });
 
 $(window).resize(function(){

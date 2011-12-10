@@ -92,22 +92,17 @@ $(document).ready(function(){
 	
 	if ($('.infinity-box-left').length > 0) {
 		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
-		$('.infinity-box-left').after("<div class='infinity-left-corner'>&nbsp</div>");
+		$('body').prepend("<div class='infinity-left-corner'>&nbsp</div>");
 		var width = Math.round(($(window).width() - 1140)/2) + "px";
 		var height = $(".infinity-box-left").outerHeight() + "px";
 		var top = Math.round($('.infinity-box-left').offset().top) + "px";
-		var left = $(".infinity-box-left").outerWidth() - 197 + "px";
-		$('.infinity-left-corner').css('margin-left', left);
+		var left = Math.round(($(window).width() - 1140)/2) + $(".infinity-box-left").outerWidth() - 197 + "px";
+		var cornerButt = ($(".infinity-box-left").outerHeight() + Math.round($('.infinity-box-left').offset().top))  + "px";
 		$('.infinity-left').css('width', width);
 		$('.infinity-left').css('height', height);
 		$('.infinity-left').css('top', top);
-		if ($('.infinity-box-left').hasClass("splash")) {
-			var cornerTop = $(".infinity-box-left").outerHeight() - 75 + "px";
-			$('.infinity-left-corner').css('margin-top', cornerTop);
-		} else {
-			var cornerTop = $(".infinity-box-left").outerHeight() + "px";
-			$('.infinity-left-corner').css('margin-top', cornerTop);
-		}
+		$('.infinity-left-corner').css('top', cornerButt);
+		$('.infinity-left-corner').css('left', left);
 	}
 	
 	if ($('.infinity-box-right').length > 0) {
