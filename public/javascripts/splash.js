@@ -102,9 +102,12 @@ $(document).ready(function(){
 		$('.infinity-left').css('height', height);
 		$('.infinity-left').css('top', top);
 		if ($('.infinity-box-left').hasClass("splash")) {
-			height = $(".infinity-box-left").outerHeight() - 75 + "px";
+			var cornerTop = $(".infinity-box-left").outerHeight() - 75 + "px";
+			$('.infinity-left-corner').css('margin-top', cornerTop);
+		} else {
+			var cornerTop = $(".infinity-box-left").outerHeight() + "px";
+			$('.infinity-left-corner').css('margin-top', cornerTop);
 		}
-		$('.infinity-left-corner').css('margin-top', height);
 	}
 	
 	if ($('.infinity-box-right').length > 0) {

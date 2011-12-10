@@ -691,6 +691,7 @@ ul#messages li a {
 	height: 90px;
 	padding: 10px;
 	color: #999;
+	text-decoration: none;
 }
 
 ul#messages li a:hover {
@@ -851,7 +852,7 @@ nav.pagination .next a { margin-left: 25px; }
 }
 .infinity-right { right: 0; }
 
-.fixed { position: fixed; }
+.fixed { position: fixed !important; }
 
 .infinity-left-corner {
 	background: url(../images/infinite-left-corner.png) no-repeat;
