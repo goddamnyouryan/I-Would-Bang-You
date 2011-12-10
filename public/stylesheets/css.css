@@ -849,7 +849,22 @@ nav.pagination .next a { margin-left: 25px; }
 	background: #000;
 	position:absolute;
 }
-
 .infinity-right { right: 0; }
 
 .fixed { position: fixed; }
+
+.infinity-left-corner {
+	background: url(../images/infinite-left-corner.png) no-repeat;
+	width:197px;
+	height: 130px;
+	position: absolute;
+}
+
+.infinity-right-corner {
+	background: url(../images/infinite-right-corner.png) no-repeat;
+	width:197px;
+	height: 130px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}

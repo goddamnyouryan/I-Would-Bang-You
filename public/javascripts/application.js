@@ -66,25 +66,20 @@ $(document).ready(function(){
 	
 	if ($('.profile-infinity-box-left').length > 0) {
 		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
+		$('.profile-infinity-box-left').after("<div class='infinity-left-corner'>&nbsp</div>");
 		var width = Math.round(($(window).width() - 1140)/2) + "px";
 		var height = $(".profile-infinity-box-left").outerHeight() + "px";
 		var top = Math.round($('.profile-infinity-box-left').offset().top) + "px";
+		var left = $(".profile-infinity-box-left").outerWidth() - 197 + "px";
 		$('.infinity-left').css('width', width);
 		$('.infinity-left').css('height', height);
 		$('.infinity-left').css('top', top);
+		$('.infinity-left-corner').css('margin-top', height);
+		$('.infinity-left-corner').css('margin-left', left);
 		if ($('.profile-infinity-box-left').hasClass("fixed")) {
 			$('.infinity-left').addClass('fixed');
+			$('.infinity-left-corner').addClass('fixed');
 		}
-	}
-	
-	if ($('.infinity-box-right').length > 0) {
-		$('body').prepend("<div class='infinity-right'>&nbsp</div>");
-		var width = Math.round(($(window).width() - 1140)/2) + "px";
-		var height = $(".infinity-box-right").outerHeight() + "px";
-		var top = Math.round($('.infinity-box-right').offset().top) + "px";
-		$('.infinity-right').css('width', width);
-		$('.infinity-right').css('height', height);
-		$('.infinity-right').css('top', top);
 	}
 
 });

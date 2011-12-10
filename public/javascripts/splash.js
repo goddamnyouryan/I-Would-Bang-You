@@ -92,19 +92,31 @@ $(document).ready(function(){
 	
 	if ($('.infinity-box-left').length > 0) {
 		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
+		$('.infinity-box-left').after("<div class='infinity-left-corner'>&nbsp</div>");
 		var width = Math.round(($(window).width() - 1140)/2) + "px";
 		var height = $(".infinity-box-left").outerHeight() + "px";
 		var top = Math.round($('.infinity-box-left').offset().top) + "px";
+		var left = $(".infinity-box-left").outerWidth() - 197 + "px";
+		$('.infinity-left-corner').css('margin-left', left);
 		$('.infinity-left').css('width', width);
 		$('.infinity-left').css('height', height);
 		$('.infinity-left').css('top', top);
+		if ($('.infinity-box-left').hasClass("splash")) {
+			height = $(".infinity-box-left").outerHeight() - 75 + "px";
+		}
+		$('.infinity-left-corner').css('margin-top', height);
 	}
 	
 	if ($('.infinity-box-right').length > 0) {
 		$('body').prepend("<div class='infinity-right'>&nbsp</div>");
+		$('.infinity-box-right').after("<div class='infinity-right-corner'>&nbsp</div>");
 		var width = Math.round(($(window).width() - 1140)/2) + "px";
 		var height = $(".infinity-box-right").outerHeight() + "px";
 		var top = Math.round($('.infinity-box-right').offset().top) + "px";
+		var right = Math.round(($(window).width() - 1140)/2) + $(".infinity-box-right").outerWidth() - 197 + "px"
+		var cornerTop = Math.round($('.infinity-box-right').offset().top) + $(".infinity-box-right").outerHeight() + "px";
+		$('.infinity-right-corner').css('margin-right', right);
+		$('.infinity-right-corner').css('margin-top', cornerTop);
 		$('.infinity-right').css('width', width);
 		$('.infinity-right').css('height', height);
 		$('.infinity-right').css('top', top);
