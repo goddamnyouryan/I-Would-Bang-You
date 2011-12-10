@@ -108,7 +108,7 @@
 	
 - else
 
-	.profile-infinity-box-left{ :style => "position:fixed;" }
+	.profile-infinity-box-left.fixed
 		= image_tag @user.profile_photo
 		.fl{ :style => "margin-left: 10px;"}
 			%h2= @user.login

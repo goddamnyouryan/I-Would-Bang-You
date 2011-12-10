@@ -50,9 +50,9 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	if ($(".flash").length > 0) {
-		$('.flash').delay(2000).slideUp('fast');
-	}
+	//if ($(".flash").length > 0) {
+	//	$('.flash').delay(2000).slideUp('fast');
+	//}
 	
 	$("nav#account_settings ul li a").live("click", function() {
 		newContent = "#" + $(this).attr('name')
@@ -63,6 +63,29 @@ $(document).ready(function(){
 		$(this).addClass("current");
 		return false
 	});
+	
+	if ($('.profile-infinity-box-left').length > 0) {
+		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
+		var width = Math.round(($(window).width() - 1140)/2) + "px";
+		var height = $(".profile-infinity-box-left").outerHeight() + "px";
+		var top = Math.round($('.profile-infinity-box-left').offset().top) + "px";
+		$('.infinity-left').css('width', width);
+		$('.infinity-left').css('height', height);
+		$('.infinity-left').css('top', top);
+		if ($('.profile-infinity-box-left').hasClass("fixed")) {
+			$('.infinity-left').addClass('fixed');
+		}
+	}
+	
+	if ($('.infinity-box-right').length > 0) {
+		$('body').prepend("<div class='infinity-right'>&nbsp</div>");
+		var width = Math.round(($(window).width() - 1140)/2) + "px";
+		var height = $(".infinity-box-right").outerHeight() + "px";
+		var top = Math.round($('.infinity-box-right').offset().top) + "px";
+		$('.infinity-right').css('width', width);
+		$('.infinity-right').css('height', height);
+		$('.infinity-right').css('top', top);
+	}
 
 });
 
