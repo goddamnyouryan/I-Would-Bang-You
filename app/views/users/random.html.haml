@@ -19,18 +19,24 @@
 		
 		#rating
 			-if current_user.mates.include?(@user)
-				-@rating = Rating.find_by_user_id_and_mate_id(current_user.id, @user.id)
-				-if @rating.status == "bang"
-					You would totally hit that.
-				-elsif @rating.status == "date"
-					Aww you like them.
-				-elsif @rating.status == "nope"
-					Ugh, they are gross.
-				-unless @user.mates.include?(current_user)
-					= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
-				-else
-					-@message = Message.where("sender_id = ? AND receiver_id = ?", current_user.id, @user.id).first
-					="You like each other! #{link_to "Message #{@user.pronoun}", @message}"
+				.rated
+					-@rating = Rating.find_by_user_id_and_mate_id(current_user.id, @user.id)
+					-if @rating.status == "bang"
+						You would totally hit that.
+					-elsif @rating.status == "date"
+						Aww you like them.
+					-elsif @rating.status == "nope"
+						Ugh, they are gross.
+					-unless @user.mates.include?(current_user)
+						= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
+					-else
+						-@message = Message.where("sender_id = ? AND receiver_id = ?", current_user.id, @user.id).first
+						-unless @message.nil?
+							%br/
+							You like each other! 
+							=link_to "Message #{@user.pronoun}", @message
+						-else
+							= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
 			-else
 				%p= link_to "I would bang #{@user.pronoun}", user_rate_path(@user, :status => "bang"), :method => :post, :class => "white-button"
 				%p= link_to "I would date #{@user.pronoun}", user_rate_path(@user, :status => "date"), :method => :post, :class => "white-button"
