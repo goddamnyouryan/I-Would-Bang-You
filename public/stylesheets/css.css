@@ -869,3 +869,13 @@ nav.pagination .next a { margin-left: 25px; }
 	right: 0;
 	top: 0;
 }
+
+.black-link {
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.black-link:hover {
+	text-decoration: underline;
+}

@@ -1,7 +1,7 @@
 Bang::Application.routes.draw do
 
   match "/users/check_login" => "users#check_login"
-  devise_for :users, :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
+  devise_for :users, :controllers => { :registrations => "users/registrations", :sessions => "users/sessions", :passwords => "users/passwords" }
   root :to => "users#index"
   resources :photos, :only => ["index", "create"]
   resources :users, :only => ["show", "index"] do
