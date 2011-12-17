@@ -67,7 +67,17 @@ $(document).ready(function(){
 });
 
 $(window).load(function(){
-	
+	infinityBoxSize();
+});
+
+$(window).resize(function(){
+	$("div.logged_in").css('height', "0")
+	var height = $(document).height() - 310;
+	$("div.logged_in").css('height', height + "px")
+});
+
+function infinityBoxSize() {
+
 	if ($('.profile-infinity-box-left').length > 0) {
 		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
 		$('.profile-infinity-box-left').after("<div class='infinity-left-corner'>&nbsp</div>");
@@ -86,10 +96,4 @@ $(window).load(function(){
 		}
 	}
 	
-});
-
-$(window).resize(function(){
-	$("div.logged_in").css('height', "0")
-	var height = $(document).height() - 310;
-	$("div.logged_in").css('height', height + "px")
-});
+}
