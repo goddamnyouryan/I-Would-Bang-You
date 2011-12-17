@@ -30,7 +30,7 @@
 					-unless @user.mates.include?(current_user)
 						= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
 					-else
-						-@message = Message.where("sender_id = ? AND receiver_id = ?", current_user.id, @user.id).first
+						-@message = Message.where("sender_id = ? AND receiver_id = ? OR sender_id = ? AND receiver_id = ?", current_user.id, @user.id, @user.id, current_user.id).first
 						-unless @message.nil?
 							%br/
 							You like each other! 
