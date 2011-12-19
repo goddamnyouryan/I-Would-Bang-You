@@ -893,6 +893,7 @@ nav.pagination .next a { margin-left: 25px; }
 	cursor: default;
 }
 
-.profile-infinity-box-left p.white-button img {
+.profile-infinity-box-left .white-button img {
 	float: none !important;
+	height: 18px;
 }

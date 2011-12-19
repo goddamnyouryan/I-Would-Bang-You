@@ -65,7 +65,10 @@ $(document).ready(function(){
 	});
 	
 	$('.disable').live("ajax:beforeSend", function(){
-		$(this).parent().html("<p class='white-button'><img alt='Disable' src='/images/disable.gif' /></p>");
+		var height = $(".disable").height() + "px";
+		$(this).attr("href", "/")
+		$(this).html("<img alt='Disable' src='/images/disable.gif' />");
+		$(this).css("height", height);
 	})
 
 });
