@@ -19,6 +19,6 @@
 				= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
 		
 -else
-	%p= link_to "I would bang #{@user.pronoun}", user_ratings_path(@user, :status => "bang"), :method => :post, :remote => true, :class => "white-button"
-	%p= link_to "I would date #{@user.pronoun}", user_ratings_path(@user, :status => "date"), :method => :post, :remote => true, :class => "white-button"
-	%p= link_to "Eww gross, no way.", user_ratings_path(@user, :status => "nope"), :method => :post, :remote => true, :class => "white-button"
+	%p= link_to "I would bang #{@user.pronoun}", user_ratings_path(@user, :status => "bang"), :method => :post, :remote => true, :class => "white-button disable"
+	%p= link_to "I would date #{@user.pronoun}", user_ratings_path(@user, :status => "date"), :method => :post, :remote => true, :class => "white-button disable"
+	%p= link_to "Eww gross, no way.", user_ratings_path(@user, :status => "nope"), :method => :post, :remote => true, :class => "white-button disable"

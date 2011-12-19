@@ -63,6 +63,10 @@ $(document).ready(function(){
 		$(this).addClass("current");
 		return false
 	});
+	
+	$('.disable').live("ajax:beforeSend", function(){
+		$(this).parent().html("<p class='white-button'><img alt='Disable' src='/images/disable.gif' /></p>");
+	})
 
 });
 

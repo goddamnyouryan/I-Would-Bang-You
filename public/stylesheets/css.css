@@ -879,3 +879,20 @@ nav.pagination .next a { margin-left: 25px; }
 .black-link:hover {
 	text-decoration: underline;
 }
+
+.profile-infinity-box-left p.white-button {
+	padding: 0;
+	display: block;
+	margin: 0 auto;
+	width: 80%;
+	height:32px;
+}
+
+.profile-infinity-box-left p.white-button:hover {
+	background: #f3f2f0;
+	cursor: default;
+}
+
+.profile-infinity-box-left p.white-button img {
+	float: none !important;
+}
