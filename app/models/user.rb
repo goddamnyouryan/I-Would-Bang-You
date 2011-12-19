@@ -96,6 +96,22 @@ class User < ActiveRecord::Base
     end
   end
   
+  def looking_for_colloquial_singular
+    if self.looking_for_men == true && self.looking_for_women == true
+      "guy or girl"
+    elsif self.sex == "Male" && self.looking_for_men == true
+      "guy"
+    elsif self.sex == "Female" && self.looking_for_women == true
+      "girl"
+    elsif self.sex == "Female" && self.looking_for_men == true
+      "guy"
+    elsif self.sex == "Male" && self.looking_for_women == true
+      "girl"
+    else
+      "person"
+    end
+  end
+  
   def looking_for
     if self.looking_for_men == true && self.looking_for_women == true
       "Bisexual"

@@ -58,5 +58,5 @@
 		%h2 You don't have any messages yet.
 		%h3.no-messages
 			To receive messages, start
-			= link_to "rating some ladies.", random_path
-			If you and a girl both rate each other the same thing, you can message each other here.
+			= link_to "rating some #{current_user.looking_for_colloquial}", random_path
+			= "If you and a #{current_user.looking_for_colloquial_singular} both rate each other the same thing, you can message each other here."
