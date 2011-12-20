@@ -1,19 +1,22 @@
 $(document).ready(function(){
 
 	$("#new_user_signup input[type=text]").focus(function() {
+		resizeInfinity();
 		$(this).next().slideDown();
 	});
 	$("#new_user_signup input[type=email]").focus(function() {
 		$(this).next().slideDown();
+		resizeInfinity();
 	});
 	$("#new_user_signup input[type=password]").focus(function() {
 		$(this).next().slideDown();
+		resizeInfinity();
 	});
 	
-	$('#user_birthday').val($('#user_birthday_3i').val()+'/'+ $('#user_birthday_2i').val()+'/'+ $('#user_birthday_1i').val());
+	$('#user_birthday').val($('#user_birthday_2i').val() +'/'+ $('#user_birthday_3i').val() +'/'+ $('#user_birthday_1i').val());
 	
 	$('#user_birthday_3i,#user_birthday_2i,#user_birthday_1i').change(function() {  
-	  $('#user_birthday').val($('#user_birthday_3i').val()+'/'+ $('#user_birthday_2i').val()+'/'+ $('#user_birthday_1i').val());
+	  $('#user_birthday').val($('#user_birthday_2i').val()+'/'+ $('#user_birthday_3i').val()+'/'+ $('#user_birthday_1i').val());
 	});
 	
 	jQuery.validator.addMethod("noSpace", function(value, element) { 
@@ -82,7 +85,7 @@ $(document).ready(function(){
 			else if (element.attr("name") == "user[terms]")
 				error.insertAfter("#terms");
 			else
- 				error.insertAfter(element);
+				error.insertAfter(element);
 		}
 	});
 	
@@ -90,21 +93,25 @@ $(document).ready(function(){
 	//	$('.flash').delay(2000).slideUp('fast');
 	//}
 	
-	if ($('.infinity-box-left').length > 0) {
-		$('body').prepend("<div class='infinity-left'>&nbsp</div>");
-		$('body').prepend("<div class='infinity-left-corner'>&nbsp</div>");
-		var width = Math.round(($(window).width() - 1140)/2) + "px";
-		var height = $(".infinity-box-left").outerHeight() + "px";
-		var top = Math.round($('.infinity-box-left').offset().top) + "px";
-		var left = Math.round(($(window).width() - 1140)/2) + $(".infinity-box-left").outerWidth() - 197 + "px";
-		var cornerButt = ($(".infinity-box-left").outerHeight() + Math.round($('.infinity-box-left').offset().top))  + "px";
-		$('.infinity-left').css('width', width);
-		$('.infinity-left').css('height', height);
-		$('.infinity-left').css('top', top);
-		$('.infinity-left-corner').css('top', cornerButt);
-		$('.infinity-left-corner').css('left', left);
-	}
+	resizeInfinity();
 	
+});
+
+function resizeInfinity() {
+	//if ($('.infinity-box-left').length > 0) {
+	//	$('body').prepend("<div class='infinity-left'>&nbsp</div>");
+	//	$('body').prepend("<div class='infinity-left-corner'>&nbsp</div>");
+	//	var width = Math.round(($(window).width() - 1140)/2) + "px";
+	//	var height = $(".infinity-box-left").outerHeight() + "px";
+	//	var top = Math.round($('.infinity-box-left').offset().top) + "px";
+	//	var left = Math.round(($(window).width() - 1140)/2) + $(".infinity-box-left").outerWidth() - 197 + "px";
+	//	var cornerButt = ($(".infinity-box-left").outerHeight() + Math.round($('.infinity-box-left').offset().top))  + "px";
+	//	$('.infinity-left').css('width', width);
+	//	$('.infinity-left').css('height', height);
+	//	$('.infinity-left').css('top', top);
+	//	$('.infinity-left-corner').css('top', cornerButt);
+	//	$('.infinity-left-corner').css('left', left);
+	//}
 	if ($('.infinity-box-right').length > 0) {
 		$('body').prepend("<div class='infinity-right'>&nbsp</div>");
 		$('.infinity-box-right').after("<div class='infinity-right-corner'>&nbsp</div>");
@@ -119,5 +126,4 @@ $(document).ready(function(){
 		$('.infinity-right').css('height', height);
 		$('.infinity-right').css('top', top);
 	}
-	
-});
+}
