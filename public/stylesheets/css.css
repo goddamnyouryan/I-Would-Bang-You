@@ -732,10 +732,13 @@ ul#messages li a p {
 
 #flash_notice {
 	background: aquamarine;
-	color: #000;
-	margin-top: 55px;
-	padding: 12px;
-	text-align: center;
+  color: #000000;
+  margin: -45px 0 0;
+  padding: 12px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: -9999;
 }
 
 #flash_notice_splash {

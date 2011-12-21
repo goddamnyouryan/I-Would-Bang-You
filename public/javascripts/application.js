@@ -50,9 +50,9 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	//if ($(".flash").length > 0) {
-	//	$('.flash').delay(2000).slideUp('fast');
-	//}
+	if ($(".flash").length > 0) {
+		$('.flash').delay(2000).fadeOut('fast');
+	}
 	
 	$("nav#account_settings ul li a").live("click", function() {
 		newContent = "#" + $(this).attr('name')
@@ -67,7 +67,13 @@ $(document).ready(function(){
 	$('.disable').live("ajax:beforeSend", function(){
 		var height = $(".disable").height() + "px";
 		$(this).attr("href", "/")
-		$(this).html("<img alt='Disable' src='/images/disable.gif' />");
+		$(this).html("<img src='/images/disable.gif' />");
+		$(this).css("height", height);
+	})
+	
+	$('.disable-random').click(function(){
+		var height = $(".disable-random").height() + "px";
+		$(this).replaceWith('<a class="white-button disable-random" href="#" style="height:' + height + '">' + "<img src='/images/disable.gif' />" + '</a>')
 		$(this).css("height", height);
 	})
 

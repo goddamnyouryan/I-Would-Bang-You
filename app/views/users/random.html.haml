@@ -38,10 +38,10 @@
 						-else
 							= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
 			-else
-				%p= link_to "I would bang #{@user.pronoun}", user_rate_path(@user, :status => "bang"), :method => :post, :class => "white-button"
-				%p= link_to "I would date #{@user.pronoun}", user_rate_path(@user, :status => "date"), :method => :post, :class => "white-button"
-				%p= link_to "Eww gross, no way.", user_rate_path(@user, :status => "nope"), :method => :post, :class => "white-button"
-				%p= link_to "Skip", random_path, :class => "white-button"
+				%p= link_to "I would bang #{@user.pronoun}", user_rate_path(@user, :status => "bang"), :method => :post, :class => "white-button disable-random"
+				%p= link_to "I would date #{@user.pronoun}", user_rate_path(@user, :status => "date"), :method => :post, :class => "white-button disable-random"
+				%p= link_to "Eww gross, no way.", user_rate_path(@user, :status => "nope"), :method => :post, :class => "white-button disable-random"
+				%p= link_to "Skip", random_path, :class => "white-button disable-random"
 	
 	.fr
 		%nav#user
