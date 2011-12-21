@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
   has_many :viewed, :foreign_key => "visitor_id", :class_name => "Visit"
   
   has_many :mates, :through => :ratings
-  has_many :sent, :foreign_key => "sender_id", :class_name => "Message"
-  has_many :received, :foreign_key => "receiver_id", :class_name => "Message"
+  has_many :sent, :foreign_key => "sender_id", :class_name => "Message", :dependent => :destroy
+  has_many :received, :foreign_key => "receiver_id", :class_name => "Message", :dependent => :destroy
   
-  has_many :replys, :foreign_key => "sender_id", :class_name => "Response"
-  has_many :replyees, :foreign_key => "receiver_id", :class_name => "Response"
+  has_many :replys, :foreign_key => "sender_id", :class_name => "Response", :dependent => :destroy
+  has_many :replyees, :foreign_key => "receiver_id", :class_name => "Response", :dependent => :destroy
   
   has_many :hides
   has_many :hidden_users, :through => :hides
