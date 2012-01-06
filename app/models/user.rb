@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
   
   def default_questions
-    self.questions.create(:question => "If you had to be apart of the apocalypse, what kind of apocalypse would you want it to be?", :kind => "apocalypse")
+    self.questions.create(:question => "If you had to be a part of the apocalypse, what kind of apocalypse would you want it to be?", :kind => "apocalypse")
     self.questions.create(:question => "What was the best place you ever traveled to?", :kind => "travel")
     self.questions.create(:question => "What was your favorite class in highschool or college?", :kind => "favorite_class")
   end

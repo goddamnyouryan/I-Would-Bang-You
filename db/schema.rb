@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208091821) do
+ActiveRecord::Schema.define(:version => 20120106055739) do
 
   create_table "hides", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.datetime "updated_at"
   end
 
+  add_index "hides", ["hidden_id"], :name => "index_hides_on_hidden_id"
+  add_index "hides", ["id"], :name => "index_hides_on_id"
+  add_index "hides", ["user_id"], :name => "index_hides_on_user_id"
+
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "receiver_id"
@@ -26,6 +30,11 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.datetime "updated_at"
     t.string   "state",       :default => "unread", :null => false
   end
+
+  add_index "messages", ["id"], :name => "index_messages_on_id"
+  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
+  add_index "messages", ["state"], :name => "index_messages_on_state"
 
   create_table "photos", :force => true do |t|
     t.integer  "user_id"
@@ -40,6 +49,9 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.integer  "position"
   end
 
+  add_index "photos", ["id"], :name => "index_photos_on_id"
+  add_index "photos", ["user_id"], :name => "index_photos_on_user_id"
+
   create_table "questions", :force => true do |t|
     t.integer  "user_id"
     t.string   "question"
@@ -49,6 +61,10 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.string   "kind"
   end
 
+  add_index "questions", ["id"], :name => "index_questions_on_id"
+  add_index "questions", ["kind"], :name => "index_questions_on_kind"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
+
   create_table "ratings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "mate_id"
@@ -56,6 +72,11 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "ratings", ["id"], :name => "index_ratings_on_id"
+  add_index "ratings", ["mate_id"], :name => "index_ratings_on_mate_id"
+  add_index "ratings", ["status"], :name => "index_ratings_on_status"
+  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
 
   create_table "responses", :force => true do |t|
     t.integer  "message_id"
@@ -67,6 +88,13 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
     t.string   "state",       :default => "unread", :null => false
     t.string   "origin",      :default => "user",   :null => false
   end
+
+  add_index "responses", ["id"], :name => "index_responses_on_id"
+  add_index "responses", ["message_id"], :name => "index_responses_on_message_id"
+  add_index "responses", ["origin"], :name => "index_responses_on_origin"
+  add_index "responses", ["receiver_id"], :name => "index_responses_on_receiver_id"
+  add_index "responses", ["sender_id"], :name => "index_responses_on_sender_id"
+  add_index "responses", ["state"], :name => "index_responses_on_state"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "",   :null => false
@@ -98,7 +126,11 @@ ActiveRecord::Schema.define(:version => 20111208091821) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["id"], :name => "index_users_on_id"
+  add_index "users", ["latitude"], :name => "index_users_on_latitude"
+  add_index "users", ["longitude"], :name => "index_users_on_longitude"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["zip"], :name => "index_users_on_zip"
 
   create_table "visits", :force => true do |t|
     t.integer  "user_id"
