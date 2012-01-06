@@ -479,6 +479,7 @@ ul.users { padding: 0; }
 ul.users li {
 	margin: 0 0 15px 0;
 	list-style: none;
+	font-size: 14px;
 }
 
 ul.users li h3 {
