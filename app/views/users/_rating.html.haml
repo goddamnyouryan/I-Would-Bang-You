@@ -14,7 +14,7 @@
 			-unless @message.nil?
 				%br/
 				You like each other! 
-				=link_to "Message #{@user.pronoun}", @message
+				=link_to "Message #{@user.pronoun}", @message, :class => "white-button"
 			-else
 				= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
 		

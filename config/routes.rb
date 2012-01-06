@@ -27,6 +27,7 @@ Bang::Application.routes.draw do
   match '/history', :to => 'users#history'
   match '/about', :to => 'users#learn_more'
   match '/contact', :to => 'users#contact'
+  match '/send_contact', :to => 'users#send_contact'
   resources :messages do
     resources :responses
   end

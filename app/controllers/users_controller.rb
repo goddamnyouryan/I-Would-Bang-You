@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :index, :check_login, :contact, :learn_more ]
+  before_filter :authenticate_user!, :except => [ :index, :check_login, :contact, :send_contact, :learn_more ]
   after_filter :add_visit, :only => [:show, :random]
   
   def index
@@ -124,6 +124,11 @@ class UsersController < ApplicationController
   
   def contact 
     render :layout => "splash"
+  end
+  
+  def send_contact
+    UserMailer.contact_form(params[:name], params[:email], params[:message]).deliver
+    redirect_to root_path, :notice => "Your Message was sent!"
   end
   
   private

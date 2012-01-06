@@ -1,0 +1,11 @@
+Dear <%= @mate.login %>,
+
+You said you were into <%= @mate.login %>. Well today is your lucky day because it turns out that they are into you too.
+
+Click here to view their profile:
+<%= user_url(@user.login) %>
+
+Click here to message them: <%= message_url(@message) %>
+
+Good luck!
+The IWBY Team

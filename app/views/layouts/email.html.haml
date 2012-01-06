@@ -1,0 +1,12 @@
+!!! 5
+%html
+	%head
+	%body{ :style => 'background: #f3f2f0;color: #000;font-family: Helvetica, Arial, Sans-Serif; padding: 10px 25px;' }
+	
+		%h1
+			=link_to "I Would Bang You", "http://www.iwouldbangyou.com/", :style => 'color: #000; text-decoration:none; font-size: 48px;'
+		=yield
+		%p{ :style => 'border-top: 1px solid #999; padding: 25px 0 10px; margin-top:50px; color: #999;'}
+			Don't want to receive emails from I Would Bang You?
+			=link_to 'Click here', edit_user_registration_url, :style => 'color:#000;'
+			to unsubscribe.

@@ -4,7 +4,7 @@
 	src: url('../fonts/fico.eot?#iefix') format('embedded-opentype'),
 		url('../fonts/fico.ttf') format('truetype'),
 		url('../fonts/fico.svg#Fico') format('svg');
-	}
+}
 
 .icon,
 .icon_generated:before {
@@ -13,15 +13,16 @@
 	font-style: normal !important;
 	text-transform: none !important;
 	padding-right: 3px;
-	}
+}
 
 .icon_generated {
 	color: red;
-	}
-	.icon_generated:before {
-		content: attr(data-icon);
-		padding-right: 7px;
-		}
+}
+
+.icon_generated:before {
+	content: attr(data-icon);
+	padding-right: 7px;
+}
 
 body {
 	background: #f3f2f0;
@@ -68,7 +69,7 @@ header.main h1 {
 }
 
 header.main h1 a, footer #container h1 a {
-	background: url(../images/title.png) no-repeat;
+	background: url("http://assets.iwouldbangyou.com/images/title.png") no-repeat;
 	display: block;
 	width: 291px;
 	height: 37px;
@@ -312,7 +313,7 @@ div#about div.question {
 	font-size: 18px;
 }
 
-div#about div.question p { margin-top: 5px; }
+div#about div.question p { margin-top: 5px; line-height: 27px; }
 
 div#about div.question h3 {
 	font-size: 24px;
@@ -382,7 +383,7 @@ a.cancel:hover { text-decoration: underline; }
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	-khtml-border-radius: 5px;
-	-webkit-transition: all .2s linear;
+	-webkit-transition: color,background .2s linear;
 	-moz-transition: all .2s linear;
 }
 .black-button:hover {
@@ -510,10 +511,9 @@ div#rating .rated {
 }
 
 div#rating .rated a {
-	font-size: 12px;
+	font-size: 18px;
+	margin: 15px auto;
 }
-
-div#rating .rated a:hover { text-decoration: underline !important; }
 
 div#rating a {
 	display: block;
@@ -899,4 +899,16 @@ nav.pagination .next a { margin-left: 25px; }
 .profile-infinity-box-left .white-button img {
 	float: none !important;
 	height: 18px;
+}
+
+textarea.contact-form {
+	background: none repeat scroll 0 0 #E8E8E8;
+	border: 1px solid #9A9A9A;
+	color: #999999;
+	float: left;
+	font-family: Helvetica,Arial,Sans-Serif;
+	font-size: 16px;
+	height: 110px;
+	padding: 10px;
+	width: 828px;
 }

@@ -1,0 +1,41 @@
+%p{ :style => "color: #000; font-size: 14px;" }= "Dear #{@mate.login},"
+
+%p{ :style => "color: #000; font-size: 14px;" } #{link_to @user.login, user_url(@user.login).html_safe, :style => "color:#000; text-decoration:none; font-weight:bold;"} sent you a message.
+
+%div{ :style => "background: #E0DFDD;padding: 10px;width: 100%;"}
+	=ApplicationController.helpers.simple_format(@response.content, :style => "text-align:left;font-size: 18px;font-style:italic;")
+
+	=link_to user_url(@user.login), :style => "color: #333; display: block;text-decoration: none;border-top: 1px solid #999;margin-top:25px;padding: 15px 0 0 0;" do
+		%table
+			%tr
+				%td
+					= image_tag @user.profile_photo, :alt => "", :style => "float:left;"
+				%td
+					%h3{ :style => "font-size: 24px;margin: 0;"}= @user.login
+					= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
+					%br/
+					= "#{@user.city}," 
+					= @user.state
+					%em
+						="(#{pluralize((@user.distance_to(@mate.to_coordinates)).round, "mile")} away)"
+					%br/
+					- if @user.sign_in_count > 0
+						= "Last Online: #{time_ago_in_words(@user.last_sign_in_at)} ago"
+						%br/
+					- if @mate.mates.include?(@user)
+						%em
+							- @rating = Rating.find_by_user_id_and_mate_id(@mate, @user.id)
+							- if @rating.status == "bang"
+								You would totally hit that.
+							- elsif @rating.status == "date"
+								Aww you like them.
+							- elsif @rating.status == "nope"
+								Ugh, they are gross. No way.
+
+
+%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to respond now.", message_url(@response.message), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
+
+%p{ :style => "color: #000; font-size: 14px;" }
+	Good luck!
+	%br/
+	The IWBY team

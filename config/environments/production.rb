@@ -41,6 +41,7 @@ Bang::Application.configure do
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
   config.action_mailer.default_url_options = { :host => 'iwouldbangyou.com' }
+  config.action_mailer.asset_host = "http://www.iwouldbangyou.com"
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"

@@ -1,5 +1,38 @@
 - title "Contact"
+:javascript
+	$(document).ready(function(){
+		
+		$("#contact_form").validate({
+			rules: {
+				name: "required",
+				email: "required",
+				message: "required"
+			}
+		});
+		
+	});
 
-%h2 Contact
+%h2 Contact Us
 
-%p Ughh okay fine I'll make a dumb contact form here.
+%h3 Do you have something you want to tell us? Suggestions? Complaints? You want a job? Just want to say 'hey'? Do so below, we'll get back to you for sure.
+
+=form_tag send_contact_path, :id => "contact_form"
+
+%p
+	=label_tag :your_name
+	%br/
+	=text_field_tag :name
+	
+%p
+	=label_tag :your_email_address
+	%br/
+	=text_field_tag :email
+
+%p
+	=label_tag :your_message
+	%br/
+	=text_area_tag :message, nil, :placeholder => "Write your message to the IWBY staff here.  Better make it compelling!", :class => "contact-form"
+	
+.clear
+
+%p= submit_tag "Send Message", :class => "black-button"

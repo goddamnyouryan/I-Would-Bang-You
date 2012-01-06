@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default :from => "no-reply@iwouldbangyou.com"
+  layout 'email'
   
   def rating_match(user, mate, message)
     @user = user
@@ -15,6 +16,14 @@ class UserMailer < ActionMailer::Base
     @response = response
     mail(:to => "#{mate.email}",
          :subject => "#{user.login} sent you a message.", :from => "IWouldBangYou")
+  end
+  
+  def contact_form(name, email, message)
+    @name = name
+    @email = email
+    @message = message
+    mail(:to => "ryan.macinnes@gmail.com",
+         :subject => "IWBY contact form", :from => "IWouldBangYou")
   end
   
 end

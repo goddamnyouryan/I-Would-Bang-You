@@ -4,8 +4,8 @@
 			var scrollElem = scrollableElement('html', 'body');
 			var $target = $("ul#responses li:last"), target = "ul#responses li:last";
 			if ($target) {
-				var targetOffset = $target.offset().top;
-				$(scrollElem).animate({scrollTop: targetOffset}, 400, function() {
+				var targetOffset = $target.offset().top - 200;
+				$(scrollElem).animate({scrollTop: targetOffset}, 800, function() {
 				});
 			}
 			

@@ -1,0 +1,10 @@
+Dear <%= @mate.login %>,
+
+You've got a new message from <%= @user.login %>:
+
+"<%= @response.content %>"
+
+Click here to respond: <%= message_url(@response.message) %>
+
+Good luck!
+The IWBY Team
