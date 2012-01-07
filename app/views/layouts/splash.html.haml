@@ -4,7 +4,11 @@
 		%title I Would Bang You - The Best Thing to Ever Happen to Online Dating
 		%link{ :rel => "icon",  :href => "/favicon.png", :type => "image/png"}
 		= stylesheet_link_tag 'css'
+		<link rel="stylesheet" type="text/css" media="only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="/stylesheets/mobile.css" />
+		<meta name="viewport" content="width=device-width" />
 		= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+		-if RAILS_ENV == "development"
+			= javascript_include_tag 'protoFluid3.02.js'
 		= javascript_include_tag 'rails'
 		= javascript_include_tag 'jquery.validate.min.js'
 		= javascript_include_tag 'splash'
