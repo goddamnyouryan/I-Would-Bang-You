@@ -34,6 +34,37 @@
 		display: block;
 	}
 	
+	footer #container {
+		margin: 0 auto;
+		padding: 25px 0;
+		width: 100%;
+	}
+
+	footer #container p {
+		text-align: center;
+		margin: 10px 0 15px;
+	}
+
+	footer nav ul {
+		width: 265px;
+		margin: 15px auto;
+		padding: 0;
+	}
+
+	footer nav ul li:first-child {
+		margin-left: 0;
+	}
+
+	footer nav ul li {
+		float: none;
+		display: inline;
+	}
+	
+	.learn-more {
+		width: 90%;
+		margin: 0 auto;
+	}
+	
 }
 
 @media only screen and (min-device-width: 481px) and (orientation:landscape) {
