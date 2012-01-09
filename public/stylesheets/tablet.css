@@ -1,0 +1,43 @@
+@media only screen and (min-device-width: 481px) and (orientation:portrait) {
+	
+  .infinity-right-corner, .infinity-right { display: none; }
+
+	.fl, .fr { float: none; }
+	
+	#splash-container, #container { width: 100%; }
+
+	.infinity-box-right {
+		width: 100%;
+		margin-top: 25px !important;
+		float: left;
+	}
+	
+	#splash-container header h1 a, h3#description { margin: 0 auto; }
+	
+	h2.subtitle { text-align: center; }
+	
+	p#learn-more { 
+		margin: 15px auto;
+		width: 106px;
+	}
+	
+	.infinity-box-left {
+		margin-top: 50px !important;
+		width: 100%;
+	}
+	
+	#forgot-password { float: none !important; margin-left: 35px }
+	
+	img#victorian {
+		margin: 0 auto !important;
+		width: 406px;
+		display: block;
+	}
+	
+}
+
+@media only screen and (min-device-width: 481px) and (orientation:landscape) {
+  .infinity-right-corner, .infinity-right { display: none; }
+
+	#splash-container, #container { width: 100%; }
+}
