@@ -10,8 +10,8 @@
 				%li.unread
 					-if current_user == message.sender
 						= link_to message do
-							=image_tag message.receiver.profile_photo, :class => "fl"
-							.fl
+							=image_tag message.receiver.profile_photo, :class => "fl flfr"
+							.fl.flfr
 								%h3= message.receiver.login
 								%p
 									= truncate(message.responses.last.content, :length => 100)
@@ -20,8 +20,8 @@
 						.clear
 					-elsif current_user == message.receiver
 						= link_to message do
-							=image_tag message.sender.profile_photo, :class => "fl"
-							.fl
+							=image_tag message.sender.profile_photo, :class => "fl flfr"
+							.fl.flfr
 								%h3= message.sender.login
 								%p
 									= truncate(message.responses.last.content, :length => 100)
@@ -32,8 +32,8 @@
 				%li
 					-if current_user == message.sender
 						= link_to message do
-							=image_tag message.receiver.profile_photo, :class => "fl"
-							.fl
+							=image_tag message.receiver.profile_photo, :class => "fl flfr"
+							.fl.flfr
 								%h3= message.receiver.login
 								%p
 									= truncate(message.responses.last.content, :length => 100)
@@ -42,8 +42,8 @@
 						.clear
 					-elsif current_user == message.receiver
 						= link_to message do
-							=image_tag message.sender.profile_photo, :class => "fl"
-							.fl
+							=image_tag message.sender.profile_photo, :class => "fl flfr"
+							.fl.flfr
 								%h3= message.sender.login
 								%p
 									= truncate(message.responses.last.content, :length => 100)
@@ -52,9 +52,9 @@
 						.clear
 -else
 
-	=image_tag "victorian-splash.gif", :class => "fl"
+	=image_tag "victorian-splash.gif", :class => "fl logged-in-victorian"
 	
-	.fl{ :style => "width: 600px;"}
+	.fl{ :style => "width: 600px;", :class => "messages_list_mobile"}
 		%h2 You don't have any messages yet.
 		%h3.no-messages
 			To receive messages, start

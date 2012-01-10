@@ -4,7 +4,12 @@
 		%title= "#{content_for?(:title) ? yield(:title) : ""} - I Would Bang You"
 		%link{ :rel => "icon",  :href => "/favicon.png", :type => "image/png"}
 		= stylesheet_link_tag 'css'
+		<link rel="stylesheet" type="text/css" media="only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="/stylesheets/mobile.css" />
+		<link rel="stylesheet" type="text/css" media="only screen and (min-device-width: 481px) and (max-width: 1024px)" href="/stylesheets/tablet.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
+		-if RAILS_ENV == "development"
+			= javascript_include_tag 'protoFluid3.02.js'
 		= javascript_include_tag 'rails'
 		= javascript_include_tag 'jquery.validate.min.js'
 		= javascript_include_tag 'application'
@@ -63,7 +68,7 @@
 				.fl
 					%h1= link_to "I Would Bang You", root_path
 					%p!= "&copy; #{Time.now.year} #{link_to "Ryan MacInnes", user_path("goddamnyouryan")}"
-				.fl{ :style => "margin: 0 0 50px 100px"}
+				.fl{ :style => "margin: 0 0 50px 100px", :class => "footer-links"}
 					%nav.logged_in
 						.fl
 							%ul
@@ -72,14 +77,14 @@
 								%li{ :style => "text-transform: capitalize;"}= render :partial => "layouts/messages"
 								%li= link_to "Search", search_path
 								
-						.fl{ :style => "margin-left: 264px;" }
+						.fl{ :style => "margin-left: 264px;", :class => "footer-column" }
 							%ul
 								%li= link_to "Edit My Profile", user_path(current_user.login)
 								%li= link_to "History", history_path
 								%li= link_to "Account Settings", edit_user_registration_path
 								%li= link_to "Logout", destroy_user_session_path, :method => :delete
 								
-						.fl{ :style => "margin-left: 263px;" }
+						.fl{ :style => "margin-left: 263px;", :class => "footer-column" }
 							%ul
 								%li
 									= link_to image_tag('twitter.png'), "http://www.twitter.com/iwouldbangyou", :target => "_blank"

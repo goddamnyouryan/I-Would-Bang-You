@@ -3,7 +3,7 @@
 	
 	.profile-infinity-box-left.fixed
 		= image_tag @user.profile_photo
-		.fl{ :style => "margin-left: 10px;"}
+		.fl{ :style => "margin-left: 10px;", :class => "flfr"}
 			%h2= @user.login
 			= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
 			%br/
@@ -54,8 +54,8 @@
 			- if @user.photos.count > 0
 				= render :partial => 'photos/photos', :collection => @user.photos.order('position ASC'), :as => :photo
 			- else
-				= image_tag "victorian-home.gif", :class => "fl"
-				%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+				= image_tag "victorian-home.gif", :class => "fl logged-in-victorian"
+				%h2.fl.profile-subheader{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
 					= "#{@user.singular_pronoun} hasn't uploaded any"
 					%br/ 
 					photos yet.
@@ -71,8 +71,8 @@
 							%div{ :id => "#{question.id}_answer"}
 								= simple_format(question.answer)
 			- else
-				= image_tag "victorian-home.gif", :class => "fl"
-				%h2.fl{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
+				= image_tag "victorian-home.gif", :class => "fl logged-in-victorian"
+				%h2.fl.profile-subheader{ :style => "font-size:36px; margin: 50px 0 0 25px;"} 
 					= "#{@user.singular_pronoun} hasn't answered any"
 					%br/ 
 					questions yet.

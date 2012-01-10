@@ -43,8 +43,8 @@
 -else
 	
 	-if current_user.photos.count == 0 || current_user.questions.map(&:answer).compact.empty? || current_user.ratings.count == 0
-		= image_tag "victorian-home.gif", :class => "fl"
-		%h2.fl{ :style => "font-size:72px; margin: 20px 0 0 25px;"} 
+		= image_tag "victorian-home.gif", :class => "fl", :class => "logged-in-victorian"
+		%h2.fl{ :style => "font-size:72px; margin: 20px 0 0 25px;", :class => "logged-in-header"}
 			Let’s find you someone 
 			%br/ 
 			to bang, shall we?
@@ -76,11 +76,11 @@
 	.clear
 	
 	.user_list{ :style => "margin-right: 40px;" }
-		%h3{ :style => "font-size:48px; margin: 25px 0;"}= "Here's some random #{current_user.looking_for_colloquial}."
+		%h3{ :style => "font-size:48px; margin: 25px 0;", :class => "subheader" }= "Here's some random #{current_user.looking_for_colloquial}."
 		%ul.users
 			= render :partial => 'users', :collection => @random, :as => :user
 
 	.user_list
-		%h3{ :style => "font-size:48px; margin: 25px 0;"}= "These #{current_user.looking_for_colloquial} are your best shot."
+		%h3{ :style => "font-size:48px; margin: 25px 0;", :class => "subheader"}= "These #{current_user.looking_for_colloquial} are your best shot."
 		%ul.users
 			= render :partial => 'users', :collection => @similar, :as => :user

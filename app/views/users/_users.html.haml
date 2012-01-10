@@ -1,13 +1,13 @@
 %li
 	= link_to user_path(user.login) do
 		= image_tag user.profile_photo
-		.fl{ :style => "margin-left: 10px;"}
+		.fl.flfr{ :style => "margin-left: 10px;"}
 			%h3= user.login
 			= "#{user.age} year old #{user.looking_for.downcase} #{user.sex.downcase}"
 			%br/
 			= "#{user.city}," 
 			= user.state
-			%em
+			%em.distance
 				="(#{pluralize((user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
 			%br/
 			- if user.sign_in_count > 0
