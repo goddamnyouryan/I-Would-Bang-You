@@ -255,3 +255,11 @@ h3.message {
 	margin: 10px 0 0 10px;
 }
 
+ul#responses li.sent div.message {
+	float: none;
+	margin-left: 0;
+}
+
+ul#responses li.sent {
+	float: none;
+}
