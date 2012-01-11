@@ -65,10 +65,207 @@
 		margin: 0 auto;
 	}
 	
+	#container { 
+		height: 100% !important;
+		margin-top: 10px;
+		width: 100% !important;
+	}
+
+	.logged_in { width: 100% !important; }
+
+	div.promo {
+		width: 300px;
+		margin: 0 auto 10px;
+		float: none;
+		height: 250px;
+	}
+
+	div.promo a { width: 250px; height: 200px; }
+
+	div.promo a .icon { font-size: 110px !important; }
+
+	.first, .second {
+	    margin: 0 auto 10px !important;
+	}
+
+	.logged-in-victorian, .logged-in-header, .infinity-left-corner, .infinity-left, em.distance, header.main nav li#profile, ul#responses li.received img, ul#responses li.sent img, #respond img, .upload-photo { display: none; }
+
+	.subheader {
+		font-size: 24px !important;
+		margin: 25px auto !important;
+		text-align: center;
+		max-width: 300px;
+	}
+
+	.flfr { float: left !important; }
+
+	ul.users li h3 {
+		font-size: 18px;
+	}
+
+	ul.users li {
+		font-size: 12px;
+	}
+
+	.user_list {
+		float: none;
+		width: 100%;
+	}
+
+	header.main {
+		position: static;
+		height: 100px;
+	}
+
+	header.main div#content {
+		width: 100%;
+		padding-top: 10px;
+	}
+
+	header.main nav {
+		float: none;
+		margin: 0 auto;
+	}
+
+	header.main nav ul { 
+		margin: 0 auto;
+		padding: 0;
+		width: 320px;
+	}
+
+	header.main h1 { float: none; margin: 0; }
+	header.main h1 a { margin: 0 auto 25px; }
+
+	header.main nav li { margin-right: 13px; float: none; font-size: 12px; }
+
+	.footer-column, .footer-links { margin: 0 !important; }
+
+	footer nav.logged_in ul li { display: block; }
+	footer nav.logged_in ul li a {
+		padding: 10px 0 10px 5px;
+		border-bottom: 1px solid #999;
+		display: block;
+	}
+	footer nav.logged_in ul { width: 100%}
+
+	.bottom-random { width: 289px; margin: 15px auto; }
+
+	.profile-infinity-box-left {
+		width: 100%;
+		position: static !important;
+		margin-bottom: 15px;
+		font-size: 12px;
+		padding: 10px 0 !important;
+	}
+
+	nav#user {
+		float: none;
+		width: 240px;
+		margin: 15px auto;
+	}
+
+	ul#photos li img {
+		max-width: 500px;
+	}
+
+	ul#photos {
+		margin: 15px auto;
+		width: 500px;
+	}
+
+	.profile-subheader {
+		font-size: 24px !important;
+		margin: 15px 0 !important;
+		text-align: center;
+		width: 500px;
+	}
+
+	ul#photos li {
+		margin: 0 auto 50px;
+		max-width: 500px;
+	}
+
+	div#about {
+		margin: 0 auto;
+		width: 500px;
+	}
+
+	div#account_settings_content {
+		float: none;
+		width: 300px;
+		margin: 0 auto;
+	}
+
+	.messages_list_mobile {
+		width: 300px !important;
+		margin: 0 auto;
+	}
+
+	ul.users { margin: 0 !important; }
+
+	nav.pagination {
+		font-size: 12px;
+		margin: 15px;
+	}
+
+	ul#messages li a p {
+		font-size: 12px;
+		width: 200px;
+	}
+
+	ul#responses li.received div.message, ul#responses li.sent div.message { width: 95%; }
+
+	div#respond textarea {
+		width: 87%;
+		float: none;
+	}
+
+	div#respond { width: 100%; }
+
+	div#respond h2 { margin: 50px 0 0 10px !important; }
+
+	ul#responses li { width: 100%; }
+
+	div#respond input { margin: 10px 0 10px 10px; }
+
+	h2.message {
+		font-size: 24px;
+		margin: 0 0 0 10px;
+	}
+
+	h3.message {
+		font-size: 18px;
+		margin: 10px 0 0 10px;
+	}
+
+	ul#responses li.sent div.message {
+		float: none;
+		margin-left: 0;
+	}
+
+	ul#responses li.sent {
+		float: none;
+	}
+
+	ul#photos li p { width: 300px; }
+	
+	footer #container h1 a {
+		background: url(../images/splash-title-mobile-footer.png) no-repeat;
+		text-indent: -9999px;
+		width: 300px;
+		height: 36px;
+		display: block;
+		margin: 0 auto;
+	}
+	
 }
 
 @media only screen and (min-device-width: 481px) and (orientation:landscape) {
-  .infinity-right-corner, .infinity-right { display: none; }
+  .infinity-right-corner, .infinity-right, .infinity-left, .upload-photo { display: none; }
 
 	#splash-container, #container { width: 100%; }
+	
+	header.main div#content { width: 100%; }
+	
+	.user_list { width: 490px; }
 }

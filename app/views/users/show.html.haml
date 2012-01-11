@@ -25,7 +25,7 @@
 			
 	.profile-infinity-box-left
 		= image_tag @user.profile_photo
-		.fl{ :style => "margin-left: 10px;"}
+		.fl.flfr{ :style => "margin-left: 10px;"}
 			%h2= @user.login
 			= "#{@user.age} year old #{@user.looking_for.downcase} #{@user.sex.downcase}"
 			%br/
@@ -33,40 +33,42 @@
 			= @user.state
 			%br/
 			= link_to "edit your account", edit_user_registration_path
-		.clear	
+		.clear
 		
-		%h3 Upload a Photo
-		- form_for([@user, @photo], :html => { :multipart => true }) do |f|
-			%p
-				=f.label :photo, "choose a photo from your hard drive"
-				%br/
-				= f.file_field :photo
-			%p
-				= f.label :caption, "write a caption for this photo"
-				%br/
-				= f.text_field :caption
+		.upload-photo
+		
+			%h3 Upload a Photo
+			- form_for([@user, @photo], :html => { :multipart => true }) do |f|
+				%p
+					=f.label :photo, "choose a photo from your hard drive"
+					%br/
+					= f.file_field :photo
+				%p
+					= f.label :caption, "write a caption for this photo"
+					%br/
+					= f.text_field :caption
+				
+				%p= f.submit "Upload Image", :class => "white-button"
 			
-			%p= f.submit "Upload Image", :class => "white-button"
-		
-			- if @user.photos.count > 0
-				%h3{ :style => "margin-bottom:0;" } Edit Photos
-				%h4{ :style => "margin:0;" } Drag to Reorder
-				%ul#edit_photos
-					- @user.photos.order('position ASC').each do |photo|
-						%li{ :id => "photo_#{photo.id}"}
-							= image_tag photo.photo.url(:medium)
-							.links
-								- unless photo.profile == true
-									= link_to "make main photo", user_photo_make_profile_path(@user, photo)
+				- if @user.photos.count > 0
+					%h3{ :style => "margin-bottom:0;" } Edit Photos
+					%h4{ :style => "margin:0;" } Drag to Reorder
+					%ul#edit_photos
+						- @user.photos.order('position ASC').each do |photo|
+							%li{ :id => "photo_#{photo.id}"}
+								= image_tag photo.photo.url(:medium)
+								.links
+									- unless photo.profile == true
+										= link_to "make main photo", user_photo_make_profile_path(@user, photo)
+										%br/
+									- else
+										Your Profile Photo
+										%br/
+									= link_to "re-crop thumbnail", [@user, photo]
 									%br/
-								- else
-									Your Profile Photo
-									%br/
-								= link_to "re-crop thumbnail", [@user, photo]
-								%br/
-								= link_to "delete", [@user, photo], :method => :delete, :confirm => "Are you sure you want to delete this photo?"
-							%span.handle [drag]
-							.clear
+									= link_to "delete", [@user, photo], :method => :delete, :confirm => "Are you sure you want to delete this photo?"
+								%span.handle [drag]
+								.clear
 	
 	.fr
 		= render :partial => 'nav'

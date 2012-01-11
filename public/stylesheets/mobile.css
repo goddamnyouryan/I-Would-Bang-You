@@ -108,7 +108,7 @@ div.promo a .icon { font-size: 110px !important; }
     margin: 0 auto 10px !important;
 }
 
-.logged-in-victorian, .logged-in-header, .infinity-left-corner, .infinity-left, em.distance, header.main nav li#profile, ul#responses li.received img, ul#responses li.sent img, #respond img { display: none; }
+.logged-in-victorian, .logged-in-header, .infinity-left-corner, .infinity-left, em.distance, header.main nav li#profile, ul#responses li.received img, ul#responses li.sent img, #respond img, .upload-photo { display: none; }
 
 .subheader {
 	font-size: 24px !important;
