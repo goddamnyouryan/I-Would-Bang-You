@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
       else
         @person = @message.sender
       end
-      @responses = @message.responses.where("origin != ?", "robot")
+      @responses = @message.responses.where("origin != ?", "robot").order("created_at ASC")
       @response = Response.new
     else
       redirect_to root_path, :notice => "Sorry, you're not allowed to be there!"
