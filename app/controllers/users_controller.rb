@@ -5,7 +5,15 @@ class UsersController < ApplicationController
   def index
     if user_signed_in?
       @similar = current_user.matches.limit(10).near([current_user.latitude, current_user.longitude], 30).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
+      if @similar.count > 10
+        @left = 10 - @similar.count
+        @similar = @similar + (current_user.matches.near(current_user, 1000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))
+      end
       @random = (current_user.browse.limit(10).near([current_user.latitude, current_user.longitude], 30) - current_user.hidden_users - User.where("id = ?", current_user.id))
+      if @random.count > 10
+        @left = 10 - @random.count
+        @random = @similar + (current_user.matches.near(current_user, 1000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))
+      end
       @random = @random.sort { rand }
     else
       render :layout => "splash"
