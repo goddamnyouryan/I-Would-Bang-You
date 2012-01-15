@@ -35,6 +35,11 @@ $(document).ready(function(){
 	   }
 	},"You must select at least one!");
 	
+	$.validator.addMethod("characters", function(value, element) {
+	    return this.optional(element) || !(/:|\?|\\|\.|\*|\"|<|>|\||%/g.test(value));
+	},
+	    "Usernames can't have special characters");
+	
 	
   $("#new_user_signup").validate({
 		rules: {
@@ -43,7 +48,7 @@ $(document).ready(function(){
 				minlength: 1
 			},
 			"user[zip]": {required: true },
-			"user[login]": {required: true, remote:"/users/check_login", minlength: 3, maxlength: 15, noSpace: true },
+			"user[login]": {required: true, remote:"/users/check_login", minlength: 3, maxlength: 15, noSpace: true, characters: true },
 			"user[email]": {
 				required: true,
 				email: true
