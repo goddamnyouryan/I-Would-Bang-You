@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   
   def search
     if current_user.looking_for_colloquial == "guys"
-      @options_for_sex = [["Men", "men"], ["Women", "women"], ["Both", "both"]]
+      @options_for_sex = [["Men", "Male"], ["Women", "Female"], ["Both", "both"]]
     elsif current_user.looking_for_colloquial == "girls"
-      @options_for_sex = [["Women", "women"], ["Men", "men"], ["Both", "both"]]
+      @options_for_sex = [["Women", "Female"], ["Men", "Male"], ["Both", "both"]]
     elsif current_user.looking_for_colloquial == "guys & girls"
-      @options_for_sex = [["Women", "women"], ["Men", "men"], ["Both", "both"]]
+      @options_for_sex = [["Women", "Female"], ["Men", "Male"], ["Both", "both"]]
     else
       @options_for_sex = [["Women", "Female"], ["Men", "Male"], ["Both", "both"]]
     end
