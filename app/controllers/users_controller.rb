@@ -26,6 +26,15 @@ class UsersController < ApplicationController
   end
   
   def search
+    if current_user.looking_for_colloquial == "guys"
+      @options_for_sex = [["Men", "men"], ["Women", "women"], ["Both", "both"]]
+    elsif current_user.looking_for_colloquial == "girls"
+      @options_for_sex = [["Women", "women"], ["Men", "men"], ["Both", "both"]]
+    elsif current_user.looking_for_colloquial == "guys & girls"
+      @options_for_sex = [["Women", "women"], ["Men", "men"], ["Both", "both"]]
+    else
+      @options_for_sex = [["Women", "Female"], ["Men", "Male"], ["Both", "both"]]
+    end
     @options_for_distance = [["10 miles", 10], ["25 miles", 25], ["100 miles", 100], ["anywhere", 5000]]
     @options_for_order_by = [["Similarity","similarity"], ["Hotness", "hotness"], ["Newest","newest"], ["Distance","distance"]]
     @results = (current_user.matches.near(current_user, 1000, :order => "distance") - current_user.hidden_users)
@@ -42,25 +51,41 @@ class UsersController < ApplicationController
         @max_age = 70.years.ago
       end
       if params[:order_by] == "hotness"
-        @results = current_user.matches.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users
+        if params[:sex] == "both"
+          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users
+        else
+          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users
+        end
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "similarity"
-        @results = current_user.matches.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users
+        if params[:sex] == "both"
+          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users
+        else
+          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users
+        end
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "newest"
-        @results = current_user.matches.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users
+        if params[:sex] == "both"
+          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users
+        else
+          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users
+        end
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "distance"
-        @results = current_user.matches.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users
+        if params[:sex] == "both"
+          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users
+        else
+          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users
+        end
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
