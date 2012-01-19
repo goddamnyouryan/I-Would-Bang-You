@@ -14,6 +14,7 @@ class RatingsController < ApplicationController
           format.html { redirect_to user_path(@user.login), :notice => "Eww, they are gross. They shant be contacting you, no worries." }
         end
       elsif Rating.where("user_id = ? AND mate_id = ? AND status != ?", @user.id, current_user.id, "nope").empty?
+        UserMailer.rated(current_user, @mate, @rating.status).deliver if @mate.email_rating?
         respond_to do |format|
           format.js
           format.html { redirect_to user_path(@user.login), :notice => "You have rated this person." }
@@ -38,6 +39,7 @@ class RatingsController < ApplicationController
       if @rating.status == "nope"
         redirect_to random_path(@user.login), :notice => "Agreed. #{@user.login} IS gross. They won't contact you. Ugh."
       elsif Rating.where("user_id = ? AND mate_id = ? AND status != ?", @user.id, current_user.id, "nope").empty?
+        UserMailer.rated(current_user, @mate, @rating.status).deliver if @mate.email_rating?
         redirect_to random_path, :notice => "You have rated #{@user.login}. We'll let you know if they feel the same."
       else
         @message = Message.create(:sender_id => current_user.id, :receiver_id => params[:user_id])

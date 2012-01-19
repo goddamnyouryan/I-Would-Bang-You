@@ -38,7 +38,7 @@ $(document).ready(function(){
 	$.validator.addMethod("characters", function(value, element) {
 	    return this.optional(element) || !(/:|\?|\\|\.|\*|\"|<|>|\||%/g.test(value));
 	},
-	    "Usernames can't have special characters");
+	    "Usernames can't have special characters.");
 	
 	
   $("#new_user_signup").validate({

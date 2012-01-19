@@ -8,15 +8,15 @@
 		-elsif @rating.status == "nope"
 			Ugh, they are gross.
 		-unless @user.mates.include?(current_user)
-			= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
+			-#= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
 		-else
 			-@message = Message.where("sender_id = ? AND receiver_id = ? OR sender_id = ? AND receiver_id = ?", current_user.id, @user.id, @user.id, current_user.id).first
 			-unless @message.nil?
 				%br/
 				You like each other! 
 				=link_to "Message #{@user.pronoun}", @message, :class => "white-button"
-			-else
-				= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
+			-#-else
+				-#= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete, :remote => true
 		
 -else
 	%p= link_to "I would bang #{@user.pronoun}", user_ratings_path(@user, :status => "bang"), :method => :post, :remote => true, :class => "white-button disable"

@@ -9,6 +9,11 @@
 		-else
 			%li= link_to "all #{current_user.looking_for_colloquial} you've rated", history_path
 			
+		-if params[:mates] == "matches"
+			%li= link_to "your mates", history_path(:mates => "matches"), :class => "current"
+		-else
+			%li= link_to "your mates", history_path(:mates => "matches")
+			
 		-if params[:mates] == "bang"
 			%li= link_to "#{current_user.looking_for_colloquial} you'd bang", history_path(:mates => "bang"), :class => "current"
 		-else
@@ -26,6 +31,8 @@
 			
 -if params[:mates] == "bang"
 	%h1{ :style => "text-transform:capitalize;" }= "You'd Bang #{@count} #{current_user.looking_for_colloquial}"
+-elsif params[:mates] == "matches"
+	%h1{ :style => "text-transform:capitalize;" }= "You'd Bang #{@count} #{current_user.looking_for_colloquial} that would bang you back."
 -elsif params[:mates] == "date"
 	%h1{ :style => "text-transform:capitalize;" }= "You'd Date #{@count} #{current_user.looking_for_colloquial}"
 -elsif params[:mates] == "nope"

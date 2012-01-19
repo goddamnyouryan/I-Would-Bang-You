@@ -97,7 +97,17 @@ class UsersController < ApplicationController
   end
   
   def history 
-    if params[:mates] == "bang"
+    if params[:mates] == "matches"
+      @rated = current_user.mates.where("status = ?", "bang")
+      @history = Array.new
+      @rated.each do |user|
+        if user.mates.include?(current_user)
+          @history << user
+        end
+      end
+      @count = @history.count
+      @history = Kaminari.paginate_array(@history).page(params[:page]).per(10)
+    elsif params[:mates] == "bang"
       @history = current_user.mates.where("status = ?", "bang")
       @count = @history.count
       @history = Kaminari.paginate_array(@history).page(params[:page]).per(10)

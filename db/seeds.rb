@@ -30,8 +30,18 @@
 #   user.destroy
 # end
 
-User.all.each do |user|
-  user.questions.create(:question => "If you had to be apart of the apocalypse, what kind of apocalypse would you want it to be?", :kind => "apocalypse")
-  user.questions.create(:question => "What was the best place you ever traveled to??", :kind => "travel")
-  user.questions.create(:question => "What was your favorite class in highschool or college?", :kind => "favorite_class")
+# User.all.each do |user|
+#   user.questions.create(:question => "If you had to be apart of the apocalypse, what kind of apocalypse would you want it to be?", :kind => "apocalypse")
+#   user.questions.create(:question => "What was the best place you ever traveled to??", :kind => "travel")
+#   user.questions.create(:question => "What was your favorite class in highschool or college?", :kind => "favorite_class")
+# end
+
+Rating.all.each do |rating|
+  if rating.status != "nope"
+    unless rating.user.nil? || rating.mate.nil?
+      UserMailer.rated(rating.user, rating.mate, rating.status).deliver if rating.mate.email_rating?
+    end
+  end
 end
+    
+    

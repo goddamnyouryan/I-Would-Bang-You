@@ -1,0 +1,29 @@
+%p{ :style => "color: #000; font-size: 14px;" }= "Dear #{@user.login},"
+
+%p{ :style => "color: #000; font-size: 14px;" } #{link_to @mate.login, user_url(@mate).html_safe, :style => "color:#000; text-decoration:none; font-weight:bold;"} wants you to know that #{@mate.singular_pronoun} would #{@status} you.
+
+=link_to user_url(@mate.login), :style => "color: #333; display: block;text-decoration: none;padding: 15px 0;" do
+	%table
+		%tr
+			%td
+				= image_tag @mate.profile_photo, :alt => "", :style => "float:left;"
+			%td
+				%h3{ :style => "font-size: 24px;margin: 0;"}= @mate.login
+				= "#{@mate.age} year old #{@mate.looking_for.downcase} #{@mate.sex.downcase}"
+				%br/
+				= "#{@mate.city}," 
+				= @mate.state
+				%em
+					="(#{pluralize((@user.distance_to(@mate.to_coordinates)).round, "mile")} away)"
+				%br/
+				- if @mate.sign_in_count > 0
+					= "Last Online: #{time_ago_in_words(@mate.last_sign_in_at)} ago"
+
+
+%p{ :style => "color: #000; font-size: 14px;" } So what should you do now? Check #{@mate.pronoun} out, dummy! If you like the look of them click "I Would #{@status} #{@mate.pronoun}". This will allow you to message with #{@mate.pronoun}. If you're not interested click "Eww Gross".  You'll never hear anything about them again.
+%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to check out #{@mate.login} now!", user_url(@mate.login), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
+
+%p
+	Good Luck!
+	%br/
+	The IWBY team

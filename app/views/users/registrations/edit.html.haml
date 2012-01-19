@@ -61,6 +61,10 @@
 		
 		= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 			= devise_error_messages!
+			
+			%p
+				= f.check_box :email_rating
+				= f.label :email_rating, "Someone has rated me."
 		
 			%p
 				= f.check_box :email_match

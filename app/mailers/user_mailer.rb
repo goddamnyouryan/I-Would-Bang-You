@@ -26,4 +26,12 @@ class UserMailer < ActionMailer::Base
          :subject => "IWBY contact form", :from => "IWouldBangYou")
   end
   
+  def rated(user, mate, status)
+    @user = mate
+    @mate = user
+    @status = status
+    mail(:to => "#{@user.email}",
+         :subject => "#{@mate.login} would #{@status} you!", :from => "IWouldBangYou")
+  end
+  
 end
