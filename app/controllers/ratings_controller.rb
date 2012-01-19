@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   before_filter :authenticate_user!
-  after_filter :update_score, :only => :create
+  after_filter :update_score, :only => [:create, :browse_rate]
   after_filter :destroy_score, :only => :destroy
   
   def create
