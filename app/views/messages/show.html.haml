@@ -50,7 +50,7 @@
 
 %h2.message= "Message from #{@person.login}"
 
-%h3.message= @message.responses.first.content
+%h3.message= @message.responses.where("origin = ?", "robot").first.content
 
 %ul#responses
 	= render @responses
