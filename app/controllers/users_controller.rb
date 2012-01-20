@@ -126,8 +126,10 @@ class UsersController < ApplicationController
       @rated = current_user.mates.where("status = ?", "bang")
       @history = Array.new
       @rated.each do |user|
-        if user.mates.include?(current_user)
-          @history << user
+        if user.mate.include?(current_user)
+          unless Rating.where("user_id = ? AND mate_id = ?", user.id, current_user.id).status == "nope"
+            @history << user
+          end
         end
       end
       @count = @history.count
