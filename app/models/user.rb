@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   cattr_accessor :current_user, :terms
   
   validates :login, :presence => true, :length => {:minimum => 3}, :uniqueness => { :case_sensitive => false }, :on => :create
-  validates :zip, :presence => true
+  validates :zip, :presence => true, :length => { :is => 5 }
   validates :birthday, :date => { :before => 18.years.ago - 1.day }
   validates :sex, :presence => true
   validate :looking_for_checkboxes
