@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     else
       @options_for_sex = [["Women", "Female"], ["Men", "Male"], ["Both", "both"]]
     end
-    @options_for_distance = [["10 miles", 10], ["25 miles", 25], ["100 miles", 100], ["anywhere", 5000]]
+    @options_for_distance = [["10 miles", 10], ["25 miles", 25], ["100 miles", 100], ["anywhere", 10000]]
     @options_for_order_by = [["Similarity","similarity"], ["Hotness", "hotness"], ["Newest","newest"], ["Distance","distance"]]
     @results = (current_user.matches.near(current_user, 1000, :order => "distance") - current_user.hidden_users)
     @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
