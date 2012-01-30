@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
   cattr_accessor :current_user, :terms
   
   validates :login, :presence => true, :length => {:minimum => 3}, :uniqueness => { :case_sensitive => false }, :on => :create
-  validates :zip, :presence => true, :length => { :is => 5 }
+  validates :zip, :presence => true
   validates :birthday, :date => { :before => 18.years.ago - 1.day }
   validates :sex, :presence => true
   validate :looking_for_checkboxes
+  validate :zip_validation
 
   has_many :photos
   has_many :ratings
@@ -223,6 +224,10 @@ class User < ActiveRecord::Base
   
   def looking_for_checkboxes
     errors.add(:base, "Please check at least one 'looking for' checkbox.") unless looking_for_men || looking_for_women
+  end
+  
+  def zip_validation
+    errors.add(:base, "Please enter a valid zip/postal code") if Geocoder.coordinates("#{zip}").nil?
   end
   
 end

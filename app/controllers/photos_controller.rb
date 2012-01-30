@@ -33,8 +33,9 @@ class PhotosController < ApplicationController
   
   def destroy
     @photo = Photo.find params[:id]
+    @user = @photo.user
     @photo.destroy
-    redirect_to user_photos_path, :notice => "Photo Deleted."
+    redirect_to user_path(@user.login), :notice => "Photo Deleted!"
   end
   
   def edit_caption
