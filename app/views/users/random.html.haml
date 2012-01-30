@@ -36,9 +36,10 @@
 							%br/
 							You like each other! 
 							=link_to "Message #{@user.pronoun}", @message, :class => "white-button"
-						-#-else
-							-#= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
 							=link_to "Next Rando", random_path, :class => "white-button"
+						-else
+							=link_to "Next Rando", random_path, :class => "white-button"
+							-#= link_to "I changed my mind", user_rating_path(@user, @rating), :method => :delete
 			-else
 				%p= link_to "I would bang #{@user.pronoun}", user_rate_path(@user, :status => "bang"), :method => :post, :class => "white-button disable-random"
 				%p= link_to "I would date #{@user.pronoun}", user_rate_path(@user, :status => "date"), :method => :post, :class => "white-button disable-random"
