@@ -79,7 +79,7 @@ $(document).ready(function(){
 	
 	$("#new_photo").validate({
 		rules: {
-			"user[photo]": "required"
+			"photo[photo]": "required"
 		},
 		messages: {
 			"user[photo]": {
