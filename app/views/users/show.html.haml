@@ -42,7 +42,7 @@
 				%p
 					=f.label :photo, "choose a photo from your hard drive"
 					%br/
-					= f.file_field :photo
+					= f.file_field :photo, :name => "user[photo]"
 				%p
 					= f.label :caption, "write a caption for this photo"
 					%br/

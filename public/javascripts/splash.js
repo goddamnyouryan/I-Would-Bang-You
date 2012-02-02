@@ -19,11 +19,11 @@ $(document).ready(function(){
 	  $('#user_birthday').val($('#user_birthday_2i').val()+'/'+ $('#user_birthday_3i').val()+'/'+ $('#user_birthday_1i').val());
 	});
 	
-	jQuery.validator.addMethod("noSpace", function(value, element) { 
+	$.validator.addMethod("noSpace", function(value, element) { 
 		return value.indexOf(" ") < 0 && value != ""; 
 	}, "No space please and don't leave it empty");
 	
-	jQuery.validator.addMethod("ofAge", function(value, element) { 
+	$.validator.addMethod("ofAge", function(value, element) { 
 		return Date.parse($("#user_birthday").val()) < (18).years().ago();
 	}, "You must be 18 years old to join.");
 	
@@ -93,6 +93,17 @@ $(document).ready(function(){
 				error.insertAfter(element);
 		}
 	});
+	
+	$("#contact_form").validate({
+		rules: {
+			name: "required",
+			email: {
+				required: true,
+				email: true
+			},
+			message: "required"
+		}
+	})
 	
 	//if ($(".flash").length > 0) {
 	//	$('.flash').delay(2000).slideUp('fast');

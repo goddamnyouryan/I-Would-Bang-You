@@ -76,6 +76,17 @@ $(document).ready(function(){
 		$(this).replaceWith('<a class="white-button disable-random" href="#" style="height:' + height + '">' + "<img src='/images/disable.gif' />" + '</a>')
 		$(this).css("height", height);
 	})
+	
+	$("#new_photo").validate({
+		rules: {
+			"user[photo]": "required"
+		},
+		messages: {
+			"user[photo]": {
+				"required": "You must select a picture to upload."
+			}
+		}
+	});
 
 });
 
