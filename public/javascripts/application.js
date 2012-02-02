@@ -82,7 +82,7 @@ $(document).ready(function(){
 			"photo[photo]": "required"
 		},
 		messages: {
-			"user[photo]": {
+			"photo[photo]": {
 				"required": "You must select a picture to upload."
 			}
 		}
