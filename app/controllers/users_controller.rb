@@ -95,7 +95,7 @@ class UsersController < ApplicationController
   end
   
   def random
-    @user = (current_user.matches.joins(:photos).near(current_user, 1000, :order => "distance") - current_user.mates - current_user.hidden_users)
+    @user = (current_user.matches.joins(:photos).near(current_user, 10000, :order => "distance") - current_user.mates - current_user.hidden_users)
     @user = @user[0..10].sample
   end
   
