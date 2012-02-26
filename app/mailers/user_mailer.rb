@@ -38,6 +38,10 @@ class UserMailer < ActionMailer::Base
     @user = user
     @matches = (@user.matches.joins(:photos).near([@user.latitude, @user.longitude], 1000) - @user.hidden_users - User.where("id = ?", @user.id)).uniq
     @matches = @matches[1..10]
+    if @matches.nil?
+      @matches = User.all
+      @matches = @matches[1..10]
+    end
     mail(
       :to => "#{@user.email}",
       :subject => "Come Back to Us!", :from => "IWouldBangYou"
