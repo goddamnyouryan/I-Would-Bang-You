@@ -36,8 +36,6 @@
 					%br/
 					= "#{user.city}," 
 					= user.state
-					%em
-						="(#{pluralize((@user.distance_to(user.to_coordinates)).round, "mile")} away)"
 					%br/
 					- if user.sign_in_count > 0
 						= "Last Online: #{time_ago_in_words(user.last_sign_in_at)} ago"
