@@ -59,6 +59,7 @@ class UsersController < ApplicationController
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
+        @results = @results.uniq
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "similarity"
         if params[:sex] == "both"
@@ -69,6 +70,7 @@ class UsersController < ApplicationController
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
+        @results = @results.uniq
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "newest"
         if params[:sex] == "both"
@@ -79,6 +81,7 @@ class UsersController < ApplicationController
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
+        @results = @results.uniq
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "distance"
         if params[:sex] == "both"
@@ -89,7 +92,8 @@ class UsersController < ApplicationController
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
-        @results = (Kaminari.paginate_array(@results).page(params[:page]).per(10)).uniq
+        @results = @results.uniq
+        @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       end
     end
   end
