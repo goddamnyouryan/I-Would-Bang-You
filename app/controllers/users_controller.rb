@@ -4,17 +4,19 @@ class UsersController < ApplicationController
   
   def index
     if user_signed_in?
-      @similar = (current_user.matches.joins(:photos).limit(10).near([current_user.latitude, current_user.longitude], 1000).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
+      @similar = (current_user.matches.joins(:photos).near([current_user.latitude, current_user.longitude], 1000).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
+      @similar = @similar[1..10]
       if @similar.count < 10
         @left = 10 - @similar.count
         @similar = (@similar + (current_user.matches.joins(:photos).near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
       end
-      @random = (current_user.browse.joins(:photos).limit(10) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
+      @random = (current_user.browse.joins(:photos) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
       if @random.count < 10
         @left = 10 - @random.count
         @random = (@random + (current_user.matches.joins(:photos).near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
       end
       @random = @random.sort { rand }
+      @random = @random[1..10]
     else
       render :layout => "splash"
     end
