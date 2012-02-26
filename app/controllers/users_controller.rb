@@ -4,15 +4,15 @@ class UsersController < ApplicationController
   
   def index
     if user_signed_in?
-      @similar = current_user.matches.limit(10).near([current_user.latitude, current_user.longitude], 30).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
+      @similar = (current_user.matches.joins(:photos).limit(10).near([current_user.latitude, current_user.longitude], 50).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
       if @similar.count < 10
         @left = 10 - @similar.count
-        @similar = (@similar + (current_user.matches.near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
+        @similar = (@similar + (current_user.matches.joins(:photos).near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
       end
-      @random = (current_user.browse.limit(10).near([current_user.latitude, current_user.longitude], 30) - current_user.hidden_users - User.where("id = ?", current_user.id))
+      @random = (current_user.browse.joins(:photos).limit(10) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
       if @random.count < 10
         @left = 10 - @random.count
-        @random = (@random + (current_user.matches.near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
+        @random = (@random + (current_user.matches.joins(:photos).near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq
       end
       @random = @random.sort { rand }
     else
@@ -52,9 +52,9 @@ class UsersController < ApplicationController
       end
       if params[:order_by] == "hotness"
         if params[:sex] == "both"
-          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users - User.where("id = ?", current_user.id)
         else
-          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:score).reverse - current_user.hidden_users - User.where("id = ?", current_user.id)
         end
         if params[:mates] == "on"
           @results = @results - current_user.mates
@@ -62,9 +62,9 @@ class UsersController < ApplicationController
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "similarity"
         if params[:sex] == "both"
-          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
         else
-          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)
         end
         if params[:mates] == "on"
           @results = @results - current_user.mates
@@ -72,9 +72,9 @@ class UsersController < ApplicationController
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "newest"
         if params[:sex] == "both"
-          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users - User.where("id = ?", current_user.id)
         else
-          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).order("created_at DESC") - current_user.hidden_users - User.where("id = ?", current_user.id)
         end
         if params[:mates] == "on"
           @results = @results - current_user.mates
@@ -82,9 +82,9 @@ class UsersController < ApplicationController
         @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
       elsif params[:order_by] == "distance"
         if params[:sex] == "both"
-          @results = User.where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ?", @max_age, @min_age).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users - User.where("id = ?", current_user.id)
         else
-          @results = User.where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users - User.where("id = ?", current_user.id)
+          @results = User.joins(:photos).where("birthday >= ? AND birthday <= ? AND sex = ?", @max_age, @min_age, params[:sex]).near([current_user.latitude, current_user.longitude], params[:distance]).sort_by(&:distance_sort) - current_user.hidden_users - User.where("id = ?", current_user.id)
         end
         if params[:mates] == "on"
           @results = @results - current_user.mates
@@ -95,10 +95,10 @@ class UsersController < ApplicationController
   end
   
   def random
-    @user = (current_user.matches.near(current_user, 1000, :order => "distance") - current_user.mates - current_user.hidden_users)
-    @user = @user[0..5].sample
+    @user = (current_user.matches.joins(:photos).near(current_user, 1000, :order => "distance") - current_user.mates - current_user.hidden_users)
+    @user = @user[0..10].sample
     if @user.nil?
-      @users = current_user.matches.offset(rand(current_user.matches.count)) - current_user.hidden_users
+      @users = current_user.matches.joins(:photos).offset(rand(current_user.matches.count)) - current_user.hidden_users
       @user = @users.first
     end
   end

@@ -89,5 +89,5 @@
 	=image_tag "victorian-splash.gif", :class => "fl"
 	
 	.fl{ :style => "width: 600px;"}
-		%h2 No one to rate
-		%h3.no-messages= "Sorry, we're plum out of #{current_user.looking_for_colloquial} you'd like.  Better get some more girls on here!"
+		%h2 You've rated all the #{current_user.looking_for_colloquial}!
+		%h3.no-messages= "Sorry, we're plum out of #{current_user.looking_for_colloquial} you'd like.  Better get some more #{current_user.looking_for_colloquial} on here!"

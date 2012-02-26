@@ -48,7 +48,9 @@
 
 -title "Message from #{@person.login}"
 
-%h2.message= "Message from #{@person.login}"
+%h2.message
+	Message from
+	= link_to @person.login, user_path(@person.login), :style => "color: #000;"
 
 %h3.message= @message.responses.where("origin = ?", "robot").first.content
 
