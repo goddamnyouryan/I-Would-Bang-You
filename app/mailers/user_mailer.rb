@@ -40,7 +40,7 @@ class UserMailer < ActionMailer::Base
     @matches = @matches[1..10]
     mail(
       :to => "#{@user.email}",
-      :subject => "Finish your profile up!", :from => "IWouldBangYou"
+      :subject => "Come Back to Us!", :from => "IWouldBangYou"
     )
   end
   
