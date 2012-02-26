@@ -36,7 +36,8 @@ class UserMailer < ActionMailer::Base
   
   def reminder(user)
     @user = user
-    @matches = (@user.matches.joins(:photos).near(@user, 5000, :order => "distance").limit(10) - @user.hidden_users - User.where("id = ?", @user.id)).uniq
+    @matches = (@user.matches.joins(:photos).near([@user.latitude, @user.longitude], 1000).sort_by(&:ratio) - @user.hidden_users - User.where("id = ?", @user.id)).uniq
+    @matches = @matches[1..10]
     mail(
       :to => "#{@user.email}",
       :subject => "Finish your profile up!", :from => "IWouldBangYou"
