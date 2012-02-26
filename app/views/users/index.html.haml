@@ -43,7 +43,7 @@
 -else
 	
 	-if current_user.photos.count == 0 || current_user.questions.map(&:answer).compact.empty? || current_user.ratings.count == 0
-		= image_tag "victorian-home.gif", :class => "fl", :class => "logged-in-victorian"
+		= image_tag "victorian-home.gif", :class => "fl logged-in-victorian"
 		%h2.fl{ :style => "font-size:72px; margin: 20px 0 0 25px;", :class => "logged-in-header"}
 			Let’s find you someone 
 			%br/ 
