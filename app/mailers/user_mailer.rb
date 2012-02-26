@@ -41,5 +41,6 @@ class UserMailer < ActionMailer::Base
       :to => "#{@user.email}",
       :subject => "Finish your profile up!", :from => "IWouldBangYou"
     )
+  end
   
 end
