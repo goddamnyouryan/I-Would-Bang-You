@@ -6,13 +6,13 @@
 	
 	%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to upload some photos.", user_url(@user.login), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
 	
--if current_user.questions.map(&:answer).compact.empty?
+-if @user.questions.map(&:answer).compact.empty?
 
 	%p{ :style => "color: #000; font-size: 14px;" } You haven't answered any profile questions.  You might be hot, but it would probably be nice to get an idea of what your personality is like, don't you think? It's real easy, I swear.
 	
 	%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to answer questions.", user_url(@user.login), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
 	
--if current_user.ratings.count == 0
+-if @user.ratings.count == 0
 
 	%p{ :style => "color: #000; font-size: 14px;" } You haven't rated anyone yet. How come? There's lot of hotties on the site! On I Would Bang You, people will only contact you if you allow them to. By clicking "I Would Bang You" you are allowing them to contact you (assuming they click the same). Sounds nice right? Only people you think are hot will contact you, pretty sweet.
 	
