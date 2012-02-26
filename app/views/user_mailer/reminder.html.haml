@@ -32,7 +32,7 @@
 					= image_tag user.profile_photo, :alt => "", :style => "float:left;"
 				%td
 					%h3{ :style => "font-size: 24px;margin: 0;"}= user.login
-					= "#{user.age} year old #{@mate.looking_for.downcase} #{user.sex.downcase}"
+					= "#{user.age} year old #{user.looking_for.downcase} #{user.sex.downcase}"
 					%br/
 					= "#{user.city}," 
 					= user.state
@@ -40,7 +40,7 @@
 						="(#{pluralize((@user.distance_to(user.to_coordinates)).round, "mile")} away)"
 					%br/
 					- if user.sign_in_count > 0
-						= "Last Online: #{time_ago_in_words(@mate.last_sign_in_at)} ago"
+						= "Last Online: #{time_ago_in_words(user.last_sign_in_at)} ago"
 
 %p{ :style => "color: #000; font-size: 14px;" }
 	Good luck!
