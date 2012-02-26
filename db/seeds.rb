@@ -36,12 +36,18 @@
 #   user.questions.create(:question => "What was your favorite class in highschool or college?", :kind => "favorite_class")
 # end
 
-Rating.all.each do |rating|
-  if rating.status != "nope"
-    unless rating.user.nil? || rating.mate.nil?
-      UserMailer.rated(rating.user, rating.mate, rating.status).deliver if rating.mate.email_rating?
-    end
-  end
-end
-    
-    
+# Rating.all.each do |rating|
+#   if rating.status != "nope"
+#     unless rating.user.nil? || rating.mate.nil?
+#       UserMailer.rated(rating.user, rating.mate, rating.status).deliver if rating.mate.email_rating?
+#     end
+#   end
+# end
+
+@no_photos = User.all - User.joins(:photos).uniq
+@no_ratings = User.all - User.joins(:ratings).uniq
+@no_answers = User.all - User.joins(:questions).where("questions.answer IS NOT NULL").uniq
+@users = (@no_photos + @no_ratings + @no_answers).uniq
+@users.each do |user|
+  UserMailer.reminder(user).deliver
+end 
