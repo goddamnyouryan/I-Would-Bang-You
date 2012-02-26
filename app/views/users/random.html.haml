@@ -11,7 +11,8 @@
 			= @user.state
 			%br/
 			%em
-				="(#{pluralize((@user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
+				- unless @user.distance_to(current_user.to_coordinates).nil?
+					="(#{pluralize((@user.distance_to(current_user.to_coordinates)).round, "mile")} away)"
 			%br/
 			- if @user.sign_in_count > 0
 				= "Last Online: #{time_ago_in_words(@user.last_sign_in_at)} ago"
