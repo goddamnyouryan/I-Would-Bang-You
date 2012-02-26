@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     end
     @options_for_distance = [["10 miles", 10], ["25 miles", 25], ["100 miles", 100], ["anywhere", 10000]]
     @options_for_order_by = [["Similarity","similarity"], ["Hotness", "hotness"], ["Newest","newest"], ["Distance","distance"]]
-    @results = (current_user.matches.near(current_user, 1000, :order => "distance") - current_user.hidden_users)
+    @results = (current_user.matches.joins(:photos).near(current_user, 1000, :order => "distance") - current_user.hidden_users).uniq
     @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
     if params[:commit]
       if params[:min_age] && !params[:min_age].blank?
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
         if params[:mates] == "on"
           @results = @results - current_user.mates
         end
-        @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
+        @results = (Kaminari.paginate_array(@results).page(params[:page]).per(10)).uniq
       end
     end
   end
@@ -97,10 +97,6 @@ class UsersController < ApplicationController
   def random
     @user = (current_user.matches.joins(:photos).near(current_user, 1000, :order => "distance") - current_user.mates - current_user.hidden_users)
     @user = @user[0..10].sample
-    if @user.nil?
-      @users = current_user.matches.joins(:photos).offset(rand(current_user.matches.count)) - current_user.hidden_users
-      @user = @users.first
-    end
   end
   
   def about
