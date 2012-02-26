@@ -1,0 +1,48 @@
+%p{ :style => "color: #000; font-size: 14px;" }= "Dear #{@user.login},"
+
+-if @user.photos.count == 0
+
+	%p{ :style => "color: #000; font-size: 14px;" } It seems you haven't uploaded any photos yet.  No one will be able to find your profile on I Would Bang You if you haven't uploaded any photos.  Let's be frank...who would want to bang someone they haven't seen?
+	
+	%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to upload some photos.", user_url(@user.login), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
+	
+-if current_user.questions.map(&:answer).compact.empty?
+
+	%p{ :style => "color: #000; font-size: 14px;" } You haven't answered any profile questions.  You might be hot, but it would probably be nice to get an idea of what your personality is like, don't you think? It's real easy, I swear.
+	
+	%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to answer questions.", user_url(@user.login), :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
+	
+-if current_user.ratings.count == 0
+
+	%p{ :style => "color: #000; font-size: 14px;" } You haven't rated anyone yet. How come? There's lot of hotties on the site! On I Would Bang You, people will only contact you if you allow them to. By clicking "I Would Bang You" you are allowing them to contact you (assuming they click the same). Sounds nice right? Only people you think are hot will contact you, pretty sweet.
+	
+	%p{ :style => "color: #000; font-size: 14px;" } But that's only going to happen if you rate people! Otherwise you're stuck out here, on your lonesome.
+		
+	%p{ :align => "center", :style => "margin: 25px 0;" }= link_to "Click here to rate some #{@user.looking_for_colloquial}.", random_url, :style => "background: #000;color: #f3f2f0;padding: 7px 15px 6px;font-size: 14px;font-weight: bold;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-khtml-border-radius: 5px; text-decoration: none;"
+		
+
+%p{ :style => "color: #000; font-size: 14px;" } Why bother? Here's some #{@user.looking_for_colloquial} you could be talking to right now:
+
+-@matches.each do |user|
+
+	=link_to user_url(user.login), :style => "color: #333; display: block;text-decoration: none;padding: 15px 0;" do
+		%table
+			%tr
+				%td
+					= image_tag user.profile_photo, :alt => "", :style => "float:left;"
+				%td
+					%h3{ :style => "font-size: 24px;margin: 0;"}= user.login
+					= "#{user.age} year old #{@mate.looking_for.downcase} #{user.sex.downcase}"
+					%br/
+					= "#{user.city}," 
+					= user.state
+					%em
+						="(#{pluralize((@user.distance_to(user.to_coordinates)).round, "mile")} away)"
+					%br/
+					- if user.sign_in_count > 0
+						= "Last Online: #{time_ago_in_words(@mate.last_sign_in_at)} ago"
+
+%p{ :style => "color: #000; font-size: 14px;" }
+	Good luck!
+	%br/
+	The IWBY team

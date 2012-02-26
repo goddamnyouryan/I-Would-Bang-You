@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def index
     if user_signed_in?
-      @similar = (current_user.matches.joins(:photos).limit(10).near([current_user.latitude, current_user.longitude], 50).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
+      @similar = (current_user.matches.joins(:photos).limit(10).near([current_user.latitude, current_user.longitude], 1000).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
       if @similar.count < 10
         @left = 10 - @similar.count
         @similar = (@similar + (current_user.matches.joins(:photos).near(current_user, 5000, :order => "distance").limit(@left) - current_user.hidden_users - User.where("id = ?", current_user.id))).uniq

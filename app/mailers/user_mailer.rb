@@ -34,4 +34,12 @@ class UserMailer < ActionMailer::Base
          :subject => "#{@mate.login} would #{@status} you!", :from => "IWouldBangYou")
   end
   
+  def reminder(user)
+    @user = user
+    @matches = (@user.matches.joins(:photos).near(@user, 5000, :order => "distance").limit(10) - @user.hidden_users - User.where("id = ?", @user.id)).uniq
+    mail(
+      :to => "#{@user.email}",
+      :subject => "Finish your profile up!", :from => "IWouldBangYou"
+    )
+  
 end
