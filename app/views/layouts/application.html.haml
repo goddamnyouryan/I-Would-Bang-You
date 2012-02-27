@@ -45,6 +45,8 @@
 									%span.icon{ :style => "font-size: 10px;"} ↓
 								.clear
 								%ul#subnav
+									-if current_user == User.find_by_login("goddamnyouryan")
+										%li= link_to "admin", admin_path
 									%li= link_to "view / edit my profile", user_path(current_user.login)
 									%li= link_to "history", history_path
 									%li= link_to "account settings", edit_user_registration_path

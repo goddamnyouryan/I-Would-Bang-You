@@ -25,6 +25,7 @@ Bang::Application.routes.draw do
   match '/search', :to =>'users#search'
   match '/random', :to => 'users#random'
   match '/history', :to => 'users#history'
+  match '/admin', :to => 'users#admin'
   match '/about', :to => 'users#learn_more'
   match '/contact', :to => 'users#contact'
   match '/send_contact', :to => 'users#send_contact'

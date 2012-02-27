@@ -1,0 +1,20 @@
+- title "Admin"
+
+%h2 Admin
+
+%h3 Messages
+
+%ul#admin_messages
+	-Message.all.each do |message|
+		%li
+			%h4
+				= image_tag message.sender.nav_photo
+				=link_to message.sender.login, user_path(message.sender.login)
+				& 
+				= image_tag message.receiver.nav_photo
+				=link_to message.receiver.login, user_path(message.receiver.login)
+			%ul#admin_responses
+				-(message.responses - message.responses.where("origin = ?", "robot")).each do |response|
+					%li
+						%strong= link_to response.replyer.login, user_path(response.replyer.login)
+						=response.content

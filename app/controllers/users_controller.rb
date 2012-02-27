@@ -178,6 +178,12 @@ class UsersController < ApplicationController
     redirect_to root_path, :notice => "Your Message was sent!"
   end
   
+  def admin
+    unless current_user == User.find_by_login("goddamnyouryan")
+      redirect_to root_path
+    end
+  end
+  
   private
   
   def add_visit

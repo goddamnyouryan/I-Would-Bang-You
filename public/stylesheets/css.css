@@ -913,3 +913,14 @@ textarea.contact-form {
 	padding: 10px;
 	width: 828px;
 }
+
+ul#admin_messages { padding: 0; }
+
+ul#admin_messages li {
+	background: #E0DFDD;
+	padding: 3px 10px 10px 10px;
+	margin: 0 0 15px 0;
+	list-style-type: none;
+}
+
+ul#admin_messages li a { color: #000; text-decoration: none; }
