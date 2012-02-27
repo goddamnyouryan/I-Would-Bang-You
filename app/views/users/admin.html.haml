@@ -14,7 +14,7 @@
 				= image_tag message.receiver.nav_photo
 				=link_to message.receiver.login, user_path(message.receiver.login)
 			%ul#admin_responses
-				-(message.responses - message.responses.where("origin = ?", "robot")).each do |response|
+				-(message.responses.order("created_at ASC") - message.responses.where("origin = ?", "robot")).each do |response|
 					%li
 						%strong= link_to response.replyer.login, user_path(response.replyer.login)
 						=response.content
