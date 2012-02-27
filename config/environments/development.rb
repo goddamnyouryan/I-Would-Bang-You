@@ -34,6 +34,5 @@ Bang::Application.configure do
     :enable_starttls_auto => true  }
   config.action_mailer.default_url_options = { :host => 'iwouldbangyou.com' }
   config.action_mailer.asset_host = "http://localhost:3000"
-  
 end
 

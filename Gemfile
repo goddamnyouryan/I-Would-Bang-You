@@ -16,6 +16,7 @@ gem 'haml'
 gem 'date_validator'
 gem 'kaminari'
 gem 'exceptional'
+gem 'rack-ssl', :require => 'rack/ssl'
 
 # Use unicorn as the web server
 # gem 'unicorn'
