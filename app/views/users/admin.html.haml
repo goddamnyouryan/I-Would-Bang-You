@@ -18,3 +18,5 @@
 					%li
 						%strong= link_to response.replyer.login, user_path(response.replyer.login)
 						=response.content
+			
+			%em= "#{time_ago_in_words(message.responses.last.created_at)} ago"
