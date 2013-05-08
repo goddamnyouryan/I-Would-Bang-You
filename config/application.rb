@@ -38,5 +38,17 @@ module Bang
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.mandrillapp.com",
+      :port                 => 25,
+      :domain               => 'iwouldbangyou.com',
+      :user_name            => 'ryan.macinnes@gmail.com',
+      :password             => '7VTnzFToJEDJZPByO9iEIA',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+    config.action_mailer.default_url_options = { :host => 'iwouldbangyou.com' }
+    config.action_mailer.asset_host = "http://www.iwouldbangyou.com"
   end
 end

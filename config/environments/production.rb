@@ -30,18 +30,6 @@ Bang::Application.configure do
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false
-  
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.sendgrid.net",
-    :port                 => 25,
-    :domain               => 'iwouldbangyou.com',
-    :user_name            => 'ryan.macinnes@gmail.com',
-    :password             => 'garbage',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
-  config.action_mailer.default_url_options = { :host => 'iwouldbangyou.com' }
-  config.action_mailer.asset_host = "http://www.iwouldbangyou.com"
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
