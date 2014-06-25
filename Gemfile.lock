@@ -29,10 +29,6 @@ GEM
       activesupport (= 3.0.19)
     activesupport (3.0.19)
     arel (2.0.10)
-    aws-s3 (0.6.3)
-      builder
-      mime-types
-      xml-simple
     aws-sdk (1.8.0)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -114,13 +110,11 @@ GEM
     uuidtools (2.1.3)
     warden (1.2.1)
       rack (>= 1.0)
-    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-s3
   aws-sdk
   date_validator
   devise

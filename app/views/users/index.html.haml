@@ -6,9 +6,9 @@
 		%h3#description Create a Profile. Upload Photos. Browse Profiles. |
 										If you like the look of someone click ‘I would bang them’. | 
 										If they click the same thing on your profile, you can message them.  Easy peasy. |
-										
+
 		%p#learn-more= link_to "Learn More", about_path, :class => "black-button fr", :style => "text-decoration: none;"
-	
+
 	.infinity-box-right{ :style => "margin-top: -87px;" }
 		=form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 			%h3 Sign In
@@ -16,32 +16,31 @@
 				= f.label :login, "Email Address or Username"
 				%br/
 				= f.text_field :login
-		
+
 			%p
 				= f.label :password 
 				%br/
 				= f.password_field :password
-		
+
 			-if devise_mapping.rememberable?
 				%p
 					= f.check_box :remember_me
 					= f.label :remember_me
-		
+
 			%p
 				= f.submit "sign in", :class => "white-button"
 				- if devise_mapping.recoverable? && controller_name != 'passwords'
 					= link_to "Forgot your password?", new_password_path(resource_name), :style => "font-size: 12px;float:right;margin-top:10px;", :id => "forgot-password"
 					%br/
-			
+
 	.clear
-	
+
 	.infinity-box-left.splash{ :style => "margin-top: -50px;" }
 		= render :partial => 'users/registrations/sign_up'
-		
-	= image_tag "victorian-splash.gif", :class => "fl", :style => "margin: 25px 0 0 250px", :id => "victorian"
+
 
 -else
-	
+
 	-if current_user.photos.count == 0 || current_user.questions.map(&:answer).compact.empty? || current_user.ratings.count == 0
 		= image_tag "victorian-home.gif", :class => "fl logged-in-victorian"
 		%h2.fl{ :style => "font-size:72px; margin: 20px 0 0 25px;", :class => "logged-in-header"}
