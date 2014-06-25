@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [ :index, :check_login, :contact, :send_contact, :learn_more ]
   after_filter :add_visit, :only => [:show, :random]
-  
+
   def index
     if user_signed_in?
       @similar = (current_user.matches.joins(:photos).near([current_user.latitude, current_user.longitude], 1000).sort_by(&:ratio) - current_user.hidden_users - User.where("id = ?", current_user.id)).uniq
